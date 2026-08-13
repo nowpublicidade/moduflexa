@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Poppins } from "next/font/google";
+import { siteConfig } from "@/data/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -11,9 +12,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Moduflexa | Camas e Móveis Retráteis em São Paulo",
-  description:
-    "Transforme ambientes compactos com camas e móveis retráteis Moduflexa. Soluções inteligentes para apartamentos e studios em São Paulo.",
+  title: siteConfig.title,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

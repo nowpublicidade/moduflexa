@@ -1,19 +1,5 @@
 import { Container } from "@/components/layout/container";
-
-// Placeholder until final hero photography is approved — 06-asset-guide.md §92.
-// Neutral block instead of a generated/stock image, per 06 §116.
-function HeroImagePlaceholder() {
-  return (
-    <div
-      aria-hidden="true"
-      className="flex aspect-[4/5] w-full items-center justify-center rounded-lg border border-dashed border-border bg-surface md:aspect-[16/9]"
-    >
-      <span className="text-sm font-medium text-text-muted">
-        Imagem do hero — placeholder
-      </span>
-    </div>
-  );
-}
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 export function Hero() {
   return (
@@ -44,7 +30,7 @@ export function Hero() {
             </div>
           </div>
 
-          <HeroImagePlaceholder />
+          <ImagePlaceholder label="Imagem do hero — placeholder" />
         </div>
       </Container>
     </section>
