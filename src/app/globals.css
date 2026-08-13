@@ -14,3 +14,27 @@ body {
   outline: 2px solid var(--color-brand-orange);
   outline-offset: 3px;
 }
+
+/* Anchor navigation (01-page-structure.md §19, §41 §53 §69): smooth native
+ * scroll, and scroll-margin so the sticky header doesn't cover the section
+ * heading right after the jump. Header is h-16 (64px) on mobile, h-20 (80px)
+ * from md: up — see components/layout/header.tsx. */
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 80px;
+}
+
+@media (min-width: 768px) {
+  [id] {
+    scroll-margin-top: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
