@@ -1,7 +1,27 @@
 import { Container } from "@/components/layout/container";
 import { FloorHeading } from "@/components/sections/floor-heading";
+import { FloorImage } from "@/components/ui/floor-image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
-import type { Floor } from "@/data/floors";
+import type { Floor, FloorState } from "@/data/floors";
+
+function FloorStateVisual({
+  state,
+  aspectClassName,
+}: {
+  state: FloorState;
+  aspectClassName?: string;
+}) {
+  return state.images ? (
+    <FloorImage
+      desktop={state.images.desktop}
+      mobile={state.images.mobile}
+      alt={state.label}
+      aspectClassName={aspectClassName}
+    />
+  ) : (
+    <ImagePlaceholder label={state.label} aspectClassName={aspectClassName} />
+  );
+}
 
 type FloorSectionTheme = "light" | "white";
 
@@ -48,7 +68,7 @@ export function FloorSection({
               className={`flex flex-col gap-4 ${reverse ? "md:order-1" : ""}`}
             >
               {floor.states.map((state) => (
-                <ImagePlaceholder key={state.label} label={state.label} />
+                <FloorStateVisual key={state.label} state={state} />
               ))}
             </div>
           </div>
@@ -62,9 +82,9 @@ export function FloorSection({
             />
             <div className="grid gap-4 md:grid-cols-2">
               {floor.states.map((state) => (
-                <ImagePlaceholder
+                <FloorStateVisual
                   key={state.label}
-                  label={state.label}
+                  state={state}
                   aspectClassName="aspect-[4/3]"
                 />
               ))}

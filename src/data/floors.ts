@@ -1,5 +1,9 @@
 export type FloorState = {
   label: string;
+  images?: {
+    desktop: { avif: string; webp: string };
+    mobile: { avif: string; webp: string };
+  };
 };
 
 export type Floor = {
@@ -22,8 +26,32 @@ export const floors: Floor[] = [
     description:
       "Durante o dia, sala. Quando você precisa, quarto. A cama aparece só quando faz sentido para a rotina.",
     states: [
-      { label: "Sala com cama retrátil fechada" },
-      { label: "Mesmo ambiente com a cama retrátil aberta" },
+      {
+        label: "Sala com cama retrátil fechada",
+        images: {
+          desktop: {
+            avif: "/floors/floor-01/closed-desktop.avif",
+            webp: "/floors/floor-01/closed-desktop.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-01/closed-mobile.avif",
+            webp: "/floors/floor-01/closed-mobile.webp",
+          },
+        },
+      },
+      {
+        label: "Mesmo ambiente com a cama retrátil aberta",
+        images: {
+          desktop: {
+            avif: "/floors/floor-01/open-desktop.avif",
+            webp: "/floors/floor-01/open-desktop.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-01/open-mobile.avif",
+            webp: "/floors/floor-01/open-mobile.webp",
+          },
+        },
+      },
     ],
   },
   {
