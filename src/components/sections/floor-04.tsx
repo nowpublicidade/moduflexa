@@ -1,6 +1,6 @@
 import { Container } from "@/components/layout/container";
 import { FloorHeading } from "@/components/sections/floor-heading";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { FloorStateVisual } from "@/components/sections/floor-section";
 import { floors } from "@/data/floors";
 
 const floor = floors.find((item) => item.id === "floor-04")!;
@@ -24,8 +24,8 @@ export function Floor04() {
           <div className="grid gap-4 md:grid-cols-3">
             {floor.states.map((state) => (
               <div key={state.label} className="flex flex-col gap-3">
-                <ImagePlaceholder
-                  label={state.label}
+                <FloorStateVisual
+                  state={state}
                   aspectClassName="aspect-[3/4]"
                 />
               </div>

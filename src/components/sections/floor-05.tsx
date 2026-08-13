@@ -1,6 +1,6 @@
 import { Container } from "@/components/layout/container";
 import { FloorHeading } from "@/components/sections/floor-heading";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { FloorStateVisual } from "@/components/sections/floor-section";
 import { floors } from "@/data/floors";
 
 const floor = floors.find((item) => item.id === "floor-05")!;
@@ -26,8 +26,8 @@ export function Floor05() {
       </Container>
 
       <div className="mx-[calc(50%-50vw)] mt-10">
-        <ImagePlaceholder
-          label={floor.states[0].label}
+        <FloorStateVisual
+          state={floor.states[0]}
           aspectClassName="aspect-[4/5] md:aspect-[21/9]"
         />
       </div>

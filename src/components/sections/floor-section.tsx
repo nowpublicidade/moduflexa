@@ -1,10 +1,11 @@
 import { Container } from "@/components/layout/container";
 import { FloorHeading } from "@/components/sections/floor-heading";
+import { ImageCrossfade } from "@/components/motion/image-crossfade";
 import { FloorImage } from "@/components/ui/floor-image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import type { Floor, FloorState } from "@/data/floors";
 
-function FloorStateVisual({
+export function FloorStateVisual({
   state,
   aspectClassName,
 }: {
@@ -32,6 +33,9 @@ type FloorSectionProps = {
   layout: "split" | "full";
   reverse?: boolean;
   theme?: FloorSectionTheme;
+  // Motion proof-of-concept (04-motion-guide.md §76): only floor-01 has a
+  // real closed/open photo pair, so only it opts into the crossfade.
+  crossfade?: boolean;
 };
 
 const themeClasses: Record<FloorSectionTheme, string> = {
@@ -44,6 +48,7 @@ export function FloorSection({
   layout,
   reverse = false,
   theme = "white",
+  crossfade = false,
 }: FloorSectionProps) {
   const headingId = `${floor.id}-title`;
 
@@ -67,9 +72,16 @@ export function FloorSection({
             <div
               className={`flex flex-col gap-4 ${reverse ? "md:order-1" : ""}`}
             >
-              {floor.states.map((state) => (
-                <FloorStateVisual key={state.label} state={state} />
-              ))}
+              {crossfade && floor.states.length === 2 ? (
+                <ImageCrossfade
+                  closed={floor.states[0]}
+                  open={floor.states[1]}
+                />
+              ) : (
+                floor.states.map((state) => (
+                  <FloorStateVisual key={state.label} state={state} />
+                ))
+              )}
             </div>
           </div>
         ) : (

@@ -61,8 +61,32 @@ export const floors: Floor[] = [
     description:
       "Trabalhe quando precisar. Depois, devolva o ambiente para a casa.",
     states: [
-      { label: "Ambiente organizado, sem estação de trabalho à vista" },
-      { label: "Mesmo ambiente com home office retrátil aberto" },
+      {
+        label: "Ambiente organizado, sem estação de trabalho à vista",
+        images: {
+          desktop: {
+            avif: "/floors/floor-02/closed-desktop.avif",
+            webp: "/floors/floor-02/closed-desktop.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-02/closed-mobile.avif",
+            webp: "/floors/floor-02/closed-mobile.webp",
+          },
+        },
+      },
+      {
+        label: "Mesmo ambiente com home office retrátil aberto",
+        images: {
+          desktop: {
+            avif: "/floors/floor-02/open-desktop.avif",
+            webp: "/floors/floor-02/open-desktop.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-02/open-mobile.avif",
+            webp: "/floors/floor-02/open-mobile.webp",
+          },
+        },
+      },
     ],
   },
   {
@@ -72,8 +96,32 @@ export const floors: Floor[] = [
     description:
       "O ambiente funciona para a sua rotina todos os dias e se transforma quando alguém chega.",
     states: [
-      { label: "Ambiente no uso cotidiano" },
-      { label: "Mesmo ambiente pronto para receber visitas" },
+      {
+        label: "Ambiente no uso cotidiano",
+        images: {
+          desktop: {
+            avif: "/floors/floor-03/everyday.avif",
+            webp: "/floors/floor-03/everyday.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-03/everyday.avif",
+            webp: "/floors/floor-03/everyday.webp",
+          },
+        },
+      },
+      {
+        label: "Mesmo ambiente pronto para receber visitas",
+        images: {
+          desktop: {
+            avif: "/floors/floor-03/hosting.avif",
+            webp: "/floors/floor-03/hosting.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-03/hosting.avif",
+            webp: "/floors/floor-03/hosting.webp",
+          },
+        },
+      },
     ],
   },
   {
@@ -82,9 +130,45 @@ export const floors: Floor[] = [
     title: "O mesmo ambiente pode acompanhar diferentes momentos do seu dia",
     description: "O espaço continua o mesmo. O jeito de usar muda com você.",
     states: [
-      { label: "Manhã — trabalho" },
-      { label: "Tarde — convivência" },
-      { label: "Noite — descanso" },
+      {
+        label: "Manhã — trabalho",
+        images: {
+          desktop: {
+            avif: "/floors/floor-04/morning.avif",
+            webp: "/floors/floor-04/morning.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-04/morning.avif",
+            webp: "/floors/floor-04/morning.webp",
+          },
+        },
+      },
+      {
+        label: "Tarde — convivência",
+        images: {
+          desktop: {
+            avif: "/floors/floor-04/afternoon.avif",
+            webp: "/floors/floor-04/afternoon.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-04/afternoon.avif",
+            webp: "/floors/floor-04/afternoon.webp",
+          },
+        },
+      },
+      {
+        label: "Noite — descanso",
+        images: {
+          desktop: {
+            avif: "/floors/floor-04/night.avif",
+            webp: "/floors/floor-04/night.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-04/night.avif",
+            webp: "/floors/floor-04/night.webp",
+          },
+        },
+      },
     ],
   },
   {
@@ -93,6 +177,20 @@ export const floors: Floor[] = [
     title: "Quando os móveis mudam, a metragem deixa de ser o limite",
     description:
       "Não é sobre encaixar mais móveis. É sobre pensar o ambiente inteiro para que cada elemento tenha uma função quando você precisa e libere espaço quando não precisa.",
-    states: [{ label: "Projeto completo Moduflexa" }],
+    states: [
+      {
+        label: "Projeto completo Moduflexa",
+        images: {
+          desktop: {
+            avif: "/floors/floor-05/hero-desktop.avif",
+            webp: "/floors/floor-05/hero-desktop.webp",
+          },
+          mobile: {
+            avif: "/floors/floor-05/hero-mobile.avif",
+            webp: "/floors/floor-05/hero-mobile.webp",
+          },
+        },
+      },
+    ],
   },
 ];
