@@ -1,0 +1,67 @@
+/**
+ * Design tokens — see /docs/02-design-system.md
+ *
+ * Tailwind v4 reads `@theme` values directly (no tailwind.config.js).
+ * Every key here both (a) generates a matching utility class
+ * (e.g. --color-brand-navy → bg-brand-navy, text-brand-navy) and
+ * (b) is emitted as a real CSS custom property, so `var(--color-brand-navy)`
+ * also works in plain CSS. This keeps a single source of truth per §70.
+ */
+@theme {
+  /* Brand — 02-design-system.md §2, §5-8 */
+  --color-brand-orange-dark: #d74e01;
+  --color-brand-orange: #fa6b09;
+  --color-brand-blue: #4d7392;
+  --color-brand-navy: #152a46;
+
+  /* Neutrals — 02-design-system.md §9 */
+  --color-white: #ffffff;
+  --color-off-white: #f7f5f2;
+  --color-surface: #f0ede8;
+  --color-border: #ddd8d1;
+  --color-text: #18212a;
+  --color-text-muted: #66707a;
+  --color-black: #111111;
+
+  /* Layout — 02-design-system.md §25 */
+  --container-max: 1440px;
+
+  /* Radius — 02-design-system.md §31 */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Shadow — 02-design-system.md §33 */
+  --shadow-soft: 0 16px 50px rgba(21, 42, 70, 0.08);
+}
+
+/**
+ * Spacing (02-design-system.md §28): the documented scale (base 4px,
+ * space-1…space-11 = 4/8/12/16/24/32/48/64/96/128/160px) already matches
+ * Tailwind's native spacing scale at 1/2/3/4/6/8/12/16/24/32/40. No custom
+ * spacing tokens are defined — use Tailwind's built-in p-*, gap-*, m-*.
+ */
+
+:root {
+  /* Responsive page padding — 02-design-system.md §27 */
+  --page-padding: 20px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-padding: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --page-padding: 48px;
+  }
+}
+
+@media (min-width: 1536px) {
+  :root {
+    --page-padding: 64px;
+  }
+}
