@@ -29,13 +29,15 @@ export function Footer() {
           }}
         >
           <div className="flex flex-col gap-4">
-            <Image
-              src="/brand/logo-light.png"
-              alt="Moduflexa"
-              width={2000}
-              height={798}
-              className="h-[30px] w-auto"
-            />
+            <div className="relative h-[30px] w-[180px]">
+              <Image
+                src="/brand/logo-light.png"
+                alt="Moduflexa"
+                fill
+                sizes="180px"
+                className="object-contain object-left"
+              />
+            </div>
             <p className="max-w-[32ch] text-sm">
               Móveis flexíveis para espaços que mudam com você.
             </p>

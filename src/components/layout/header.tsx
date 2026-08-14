@@ -44,7 +44,7 @@ export function Header() {
           borderColor: solid ? "var(--color-hairline-10)" : "transparent",
         }}
       >
-        <Container>
+        <Container className="h-full">
           <div className="flex h-full items-center justify-between">
             <a href="#inicio" className="relative block h-[clamp(24px,2.6vw,30px)] shrink-0 w-[160px]">
               <Image
