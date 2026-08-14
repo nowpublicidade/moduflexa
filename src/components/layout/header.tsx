@@ -46,13 +46,13 @@ export function Header() {
       >
         <Container className="h-full">
           <div className="flex h-full items-center justify-between">
-            <a href="#inicio" className="relative block h-[clamp(24px,2.6vw,30px)] shrink-0 w-[160px]">
+            <a href="#inicio" className="relative block h-[clamp(36px,4.4vw,52px)] shrink-0 w-[220px]">
               <Image
                 src="/brand/logo-light.png"
                 alt="Moduflexa"
                 fill
                 priority
-                sizes="160px"
+                sizes="220px"
                 className="object-contain object-left transition-opacity duration-[450ms]"
                 style={{ opacity: solid ? 0 : 1 }}
               />
@@ -61,7 +61,7 @@ export function Header() {
                 alt="Moduflexa"
                 fill
                 priority
-                sizes="160px"
+                sizes="220px"
                 className="object-contain object-left transition-opacity duration-[450ms]"
                 style={{ opacity: solid ? 1 : 0 }}
               />
