@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { useHeaderState } from "@/lib/motion/use-header-state";
+import { withBasePath } from "@/lib/base-path";
 
 const navItems = [
   { href: "#ambientes", label: "Ambientes" },
@@ -48,7 +49,7 @@ export function Header() {
           <div className="flex h-full items-center justify-between">
             <a href="#inicio" className="relative block h-[clamp(36px,4.4vw,52px)] shrink-0 w-[220px]">
               <Image
-                src="/brand/logo-light.png"
+                src={withBasePath("/brand/logo-light.png")}
                 alt="Moduflexa"
                 fill
                 priority
@@ -57,7 +58,7 @@ export function Header() {
                 style={{ opacity: solid ? 0 : 1 }}
               />
               <Image
-                src="/brand/logo-primary.png"
+                src={withBasePath("/brand/logo-primary.png")}
                 alt="Moduflexa"
                 fill
                 priority

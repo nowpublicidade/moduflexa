@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParallax } from "@/lib/motion/use-parallax";
 import { useReducedMotion } from "@/lib/motion/use-reduced-motion";
+import { withBasePath } from "@/lib/base-path";
 
 const HERO_VEIL =
   "linear-gradient(180deg, rgba(21,42,70,0.58) 0%, rgba(21,42,70,0.44) 32%, rgba(21,42,70,0.42) 55%, rgba(21,42,70,0.9) 100%)";
@@ -57,10 +58,10 @@ export function Hero() {
         <picture>
           <source
             media="(min-width: 768px)"
-            srcSet="/floors/floor-05/hero-desktop.webp"
+            srcSet={withBasePath("/floors/floor-05/hero-desktop.webp")}
           />
           <img
-            src="/floors/floor-05/hero-mobile.webp"
+            src={withBasePath("/floors/floor-05/hero-mobile.webp")}
             alt=""
             fetchPriority="high"
             loading="eager"

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Product } from "@/data/products";
+import { withBasePath } from "@/lib/base-path";
 
 type ProductCardProps = {
   product: Product;
@@ -13,7 +14,7 @@ export function ProductCard({ product }: ProductCardProps) {
         style={{ backgroundColor: "var(--color-cream)" }}
       >
         <Image
-          src={product.image}
+          src={withBasePath(product.image)}
           alt={product.name}
           fill
           sizes="(min-width: 768px) 25vw, 50vw"

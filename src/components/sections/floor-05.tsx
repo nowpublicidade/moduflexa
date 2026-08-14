@@ -5,6 +5,7 @@ import { Container } from "@/components/layout/container";
 import { FloorNumeral } from "@/components/motion/floor-numeral";
 import { Reveal } from "@/components/motion/reveal";
 import { useParallax } from "@/lib/motion/use-parallax";
+import { withBasePath } from "@/lib/base-path";
 import { floors } from "@/data/floors";
 
 const floor = floors.find((item) => item.id === "floor-05")!;
@@ -41,12 +42,12 @@ export function Floor05() {
     >
       <div ref={imageRef} className="absolute inset-0 will-change-transform">
         <picture>
-          <source media="(min-width: 768px)" srcSet={images.desktop.avif} type="image/avif" />
-          <source media="(min-width: 768px)" srcSet={images.desktop.webp} type="image/webp" />
-          <source srcSet={images.mobile.avif} type="image/avif" />
-          <source srcSet={images.mobile.webp} type="image/webp" />
+          <source media="(min-width: 768px)" srcSet={withBasePath(images.desktop.avif)} type="image/avif" />
+          <source media="(min-width: 768px)" srcSet={withBasePath(images.desktop.webp)} type="image/webp" />
+          <source srcSet={withBasePath(images.mobile.avif)} type="image/avif" />
+          <source srcSet={withBasePath(images.mobile.webp)} type="image/webp" />
           <img
-            src={images.mobile.webp}
+            src={withBasePath(images.mobile.webp)}
             alt={floor.states[0].label}
             className="h-full w-full object-cover"
           />

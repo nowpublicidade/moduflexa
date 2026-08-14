@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { buildWhatsappHref, stores } from "@/data/stores";
 import { siteConfig } from "@/data/site";
+import { withBasePath } from "@/lib/base-path";
 
 const navItems = [
   { href: "#ambientes", label: "Ambientes" },
@@ -31,7 +33,7 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <div className="relative h-[30px] w-[180px]">
               <Image
-                src="/brand/logo-light.png"
+                src={withBasePath("/brand/logo-light.png")}
                 alt="Moduflexa"
                 fill
                 sizes="180px"
@@ -85,9 +87,9 @@ export function Footer() {
             >
               Instagram
             </a>
-            <a href="/politica-de-privacidade" className="text-sm hover:text-white">
+            <Link href="/politica-de-privacidade" className="text-sm hover:text-white">
               Política de privacidade
-            </a>
+            </Link>
           </div>
         </div>
 

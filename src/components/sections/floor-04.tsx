@@ -5,6 +5,7 @@ import { Container } from "@/components/layout/container";
 import { FloorNumeral } from "@/components/motion/floor-numeral";
 import { Lightbox, type LightboxItem } from "@/components/motion/lightbox";
 import { Reveal } from "@/components/motion/reveal";
+import { withBasePath } from "@/lib/base-path";
 import { floors } from "@/data/floors";
 
 const floor = floors.find((item) => item.id === "floor-04")!;
@@ -74,7 +75,7 @@ export function Floor04() {
                     type="button"
                     onClick={() =>
                       setLightboxItem({
-                        src: desktopSrc,
+                        src: withBasePath(desktopSrc),
                         ...IMAGE_DIMENSIONS,
                         caption: state.label,
                       })
@@ -82,10 +83,10 @@ export function Floor04() {
                     className="group relative block aspect-[3/4] w-full overflow-hidden"
                   >
                     <picture>
-                      <source srcSet={state.images!.mobile.avif} type="image/avif" />
-                      <source srcSet={state.images!.mobile.webp} type="image/webp" />
+                      <source srcSet={withBasePath(state.images!.mobile.avif)} type="image/avif" />
+                      <source srcSet={withBasePath(state.images!.mobile.webp)} type="image/webp" />
                       <img
-                        src={desktopSrc}
+                        src={withBasePath(desktopSrc)}
                         alt={state.label}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
                       />

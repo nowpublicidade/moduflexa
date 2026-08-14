@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useBeforeAfterCycle } from "@/lib/motion/use-before-after-cycle";
+import { withBasePath } from "@/lib/base-path";
 
 type ResponsiveSource = { avif: string; webp: string };
 type StateImages = { desktop: ResponsiveSource; mobile: ResponsiveSource };
@@ -32,11 +33,11 @@ function PictureLayer({
 }) {
   return (
     <picture className={className}>
-      <source media="(min-width: 768px)" srcSet={images.desktop.avif} type="image/avif" />
-      <source media="(min-width: 768px)" srcSet={images.desktop.webp} type="image/webp" />
-      <source srcSet={images.mobile.avif} type="image/avif" />
-      <source srcSet={images.mobile.webp} type="image/webp" />
-      <img src={images.mobile.webp} alt={alt} className="h-full w-full object-cover" />
+      <source media="(min-width: 768px)" srcSet={withBasePath(images.desktop.avif)} type="image/avif" />
+      <source media="(min-width: 768px)" srcSet={withBasePath(images.desktop.webp)} type="image/webp" />
+      <source srcSet={withBasePath(images.mobile.avif)} type="image/avif" />
+      <source srcSet={withBasePath(images.mobile.webp)} type="image/webp" />
+      <img src={withBasePath(images.mobile.webp)} alt={alt} className="h-full w-full object-cover" />
     </picture>
   );
 }

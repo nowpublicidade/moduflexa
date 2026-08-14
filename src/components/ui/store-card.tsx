@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { buildWhatsappHref, type Store } from "@/data/stores";
+import { withBasePath } from "@/lib/base-path";
 
 type StoreCardProps = {
   store: Store;
@@ -27,7 +28,7 @@ export function StoreCard({ store }: StoreCardProps) {
     >
       <div className="group relative min-h-[320px] overflow-hidden">
         <Image
-          src="/unidades/perdizes.jpg"
+          src={withBasePath("/unidades/perdizes.jpg")}
           alt={`Fachada da unidade ${store.name}`}
           fill
           sizes="(min-width: 768px) 50vw, 100vw"
