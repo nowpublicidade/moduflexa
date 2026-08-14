@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type NavItem = {
   href: string;
@@ -15,9 +15,29 @@ type MobileMenuProps = {
 
 export function MobileMenu({ items, ctaHref, ctaLabel }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div ref={rootRef} className="md:hidden">
       <button
         type="button"
         aria-expanded={open}
@@ -66,7 +86,7 @@ export function MobileMenu({ items, ctaHref, ctaLabel }: MobileMenuProps) {
           <a
             href={ctaHref}
             onClick={() => setOpen(false)}
-            className="inline-flex min-h-12 items-center justify-center rounded-pill bg-brand-orange px-6 font-bold text-white"
+            className="inline-flex min-h-12 items-center justify-center rounded-pill bg-brand-orange px-6 font-bold text-brand-navy"
           >
             {ctaLabel}
           </a>

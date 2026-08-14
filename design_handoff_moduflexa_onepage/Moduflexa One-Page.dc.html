@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#f7f5f2; color:#18212a; -webkit-font-smoothing:antialiased; }
+  a { color:#152a46; text-decoration:none; }
+  a:hover { color:#d74e01; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  [id] { scroll-margin-top:96px; }
+  input, textarea { font-family:Jost, sans-serif; }
+  @keyframes mf-cue { 0%,100% { transform:scaleY(0.25); opacity:0.35; } 45% { transform:scaleY(1); opacity:1; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    * { animation:none !important; }
+  }
+</style>
+</helmet>
+
+<div ref="{{ root }}" style="font-family:Jost, sans-serif; overflow-x:hidden;">
+
+  <div ref="{{ topScrim }}" aria-hidden="true" style="position:fixed; top:0; left:0; right:0; height:160px; z-index:55; pointer-events:none; background:linear-gradient(180deg, rgba(21,42,70,0.62) 0%, rgba(21,42,70,0.28) 45%, rgba(21,42,70,0) 100%); transition:opacity 0.6s ease;"></div>
+
+  <header ref="{{ hdr }}" style="position:fixed; top:0; left:0; right:0; z-index:60; background:transparent; border-bottom:1px solid transparent; transition:background 0.55s ease, border-color 0.55s ease;">
+    <div style="max-width:1440px; margin-inline:auto; padding:0 clamp(20px,4vw,48px); height:clamp(68px,8vw,84px); display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="#inicio" style="position:relative; display:block; height:clamp(24px,2.6vw,30px); flex:none;">
+        <img ref="{{ logoLight }}" src="public/brand/logo-light.png" alt="Moduflexa" style="display:block; height:100%; width:auto; transition:opacity 0.45s ease;">
+        <img ref="{{ logoDark }}" src="public/brand/logo-primary.png" alt="" style="position:absolute; left:0; top:0; display:block; height:100%; width:auto; opacity:0; transition:opacity 0.45s ease;">
+      </a>
+      <nav style="display:flex; align-items:center; gap:clamp(14px,2.2vw,36px); font-family:Poppins, sans-serif; font-size:13px; font-weight:500; letter-spacing:0.04em; flex-wrap:wrap; justify-content:flex-end;">
+        <a href="#ambientes" style="color:var(--hdr-fg, rgba(255,255,255,0.9)); transition:color 0.45s ease;" style-hover="color:#fa6b09;">Ambientes</a>
+        <a href="#solucoes" style="color:var(--hdr-fg, rgba(255,255,255,0.9)); transition:color 0.45s ease;" style-hover="color:#fa6b09;">Soluções</a>
+        <a href="#produtos" style="color:var(--hdr-fg, rgba(255,255,255,0.9)); transition:color 0.45s ease;" style-hover="color:#fa6b09;">Produtos</a>
+        <a href="#unidades" style="color:var(--hdr-fg, rgba(255,255,255,0.9)); transition:color 0.45s ease;" style-hover="color:#fa6b09;">Unidades</a>
+        <a href="#contato" style="color:var(--hdr-fg, rgba(255,255,255,0.9)); transition:color 0.45s ease;" style-hover="color:#fa6b09;">Contato</a>
+        <a href="#unidades" style="display:inline-flex; align-items:center; min-height:44px; padding:0 20px; border:1px solid var(--hdr-line, rgba(255,255,255,0.5)); border-radius:999px; font-size:13px; font-weight:600; color:var(--hdr-fg, #fff); transition:color 0.45s ease, border-color 0.45s ease, background 0.35s ease;" style-hover="border-color:#fa6b09; background:#fa6b09; color:#fff;">Encontre uma unidade</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav ref="{{ rail }}" aria-label="Andares" style="position:fixed; right:clamp(16px,2vw,32px); top:50%; transform:translateY(-50%); z-index:58; display:none; flex-direction:column; gap:18px; opacity:0; transition:opacity 0.6s ease;">
+    <a href="#floor-01" data-rail="1" style="display:flex; align-items:center; justify-content:flex-end; gap:10px; font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.18em; color:var(--rail-fg, rgba(21,42,70,0.35)); transition:color 0.4s ease;"><span data-rlabel style="opacity:var(--rail-lo, 0); transition:opacity 0.4s ease; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:#152a46;">Sala e quarto</span>01<span style="display:block; width:var(--rail-w, 14px); height:1px; background:currentColor; transition:width 0.4s ease;"></span></a>
+    <a href="#floor-02" data-rail="2" style="display:flex; align-items:center; justify-content:flex-end; gap:10px; font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.18em; color:var(--rail-fg, rgba(21,42,70,0.35)); transition:color 0.4s ease;"><span data-rlabel style="opacity:var(--rail-lo, 0); transition:opacity 0.4s ease; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:#152a46;">Home office</span>02<span style="display:block; width:var(--rail-w, 14px); height:1px; background:currentColor; transition:width 0.4s ease;"></span></a>
+    <a href="#floor-03" data-rail="3" style="display:flex; align-items:center; justify-content:flex-end; gap:10px; font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.18em; color:var(--rail-fg, rgba(21,42,70,0.35)); transition:color 0.4s ease;"><span data-rlabel style="opacity:var(--rail-lo, 0); transition:opacity 0.4s ease; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:#152a46;">Receber</span>03<span style="display:block; width:var(--rail-w, 14px); height:1px; background:currentColor; transition:width 0.4s ease;"></span></a>
+    <a href="#floor-04" data-rail="4" style="display:flex; align-items:center; justify-content:flex-end; gap:10px; font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.18em; color:var(--rail-fg, rgba(21,42,70,0.35)); transition:color 0.4s ease;"><span data-rlabel style="opacity:var(--rail-lo, 0); transition:opacity 0.4s ease; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:#152a46;">Momentos do dia</span>04<span style="display:block; width:var(--rail-w, 14px); height:1px; background:currentColor; transition:width 0.4s ease;"></span></a>
+    <a href="#floor-05" data-rail="5" style="display:flex; align-items:center; justify-content:flex-end; gap:10px; font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.18em; color:var(--rail-fg, rgba(21,42,70,0.35)); transition:color 0.4s ease;"><span data-rlabel style="opacity:var(--rail-lo, 0); transition:opacity 0.4s ease; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:#152a46;">Projeto completo</span>05<span style="display:block; width:var(--rail-w, 14px); height:1px; background:currentColor; transition:width 0.4s ease;"></span></a>
+  </nav>
+
+  <section id="inicio" data-screen-label="Hero" style="position:relative; min-height:min(94vh,960px); display:flex; flex-direction:column; background:#152a46; overflow:hidden;">
+    <img ref="{{ heroImg }}" src="public/floors/floor-05/hero-desktop.webp" alt="Studio com cama retrátil aberta integrada à sala" style="position:absolute; inset:-6% 0; width:100%; height:112%; object-fit:cover; will-change:transform;">
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(21,42,70,0.58) 0%, rgba(21,42,70,0.44) 32%, rgba(21,42,70,0.42) 55%, rgba(21,42,70,0.9) 100%);"></div>
+    <div style="height:clamp(68px,8vw,84px); flex:none;"></div>
+
+    <div ref="{{ heroContent }}" style="position:relative; z-index:3; flex:1; display:flex; align-items:flex-end;">
+      <div style="width:100%; max-width:1440px; margin-inline:auto; padding:64px clamp(20px,4vw,48px) clamp(48px,6vw,88px); display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(28px,4vw,64px); align-items:end;">
+        <div style="display:flex; flex-direction:column; gap:26px;">
+          <span style="font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.24em; text-transform:uppercase; color:#fa6b09;">Ambientes que se transformam</span>
+          <div style="overflow:hidden;">
+            <h1 ref="{{ heroH1 }}" style="margin:0; padding-bottom:0.2em; margin-bottom:-0.2em; font-family:Poppins, sans-serif; font-weight:600; font-size:clamp(40px,5.6vw,92px); line-height:1.02; letter-spacing:-0.035em; color:#fff; max-width:19ch; text-wrap:balance;">O espaço da sua casa pode fazer muito mais</h1>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center; font-family:Poppins, sans-serif;">
+            <a href="#ambientes" style="display:inline-flex; align-items:center; min-height:54px; padding:0 32px; border-radius:999px; background:#fa6b09; color:#fff; font-size:14px; font-weight:600;" style-hover="background:#d74e01;">Explore as possibilidades</a>
+            <a href="#unidades" style="display:inline-flex; align-items:center; min-height:54px; padding:0 32px; border-radius:999px; border:1px solid rgba(255,255,255,0.45); color:#fff; font-size:14px; font-weight:600;" style-hover="border-color:#fff;">Encontre uma unidade</a>
+          </div>
+        </div>
+        <p style="margin:0 0 6px; font-size:clamp(16px,1.3vw,20px); font-weight:300; line-height:1.65; color:rgba(255,255,255,0.82); border-left:1px solid rgba(255,255,255,0.3); padding-left:24px; max-width:44ch; text-wrap:pretty;">Soluções retráteis e multifuncionais para transformar ambientes compactos conforme a sua rotina.</p>
+      </div>
+    </div>
+    <div aria-hidden="true" style="position:absolute; left:50%; bottom:0; z-index:3; display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <span style="display:block; width:1px; height:56px; background:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0)); transform-origin:top; animation:mf-cue 2.8s ease-in-out infinite;"></span>
+    </div>
+  </section>
+
+  <section id="ambientes" data-screen-label="Introdução" style="background:#fff; border-bottom:1px solid rgba(21,42,70,0.08);">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,10vw,150px) clamp(20px,4vw,48px);">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(32px,6vw,96px); align-items:start;">
+        <h2 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.8vw,56px); line-height:1.06; letter-spacing:-0.025em; color:#152a46;">Seu espaço não precisa ter uma única função</h2>
+        <p style="margin:0; max-width:52ch; padding-top:6px; font-size:clamp(17px,1.35vw,21px); font-weight:300; line-height:1.75; color:#3f4a55; text-wrap:pretty;">A casa muda ao longo do dia. Ela pode ser trabalho pela manhã, convivência à tarde e descanso à noite. Os móveis também podem acompanhar essa mudança.</p>
+      </div>
+      <div style="margin-top:clamp(56px,7vw,104px); display:flex; align-items:center; gap:clamp(16px,3vw,28px); font-family:Poppins, sans-serif; font-size:12px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#fa6b09;">
+        <span style="flex:1; height:1px; background:rgba(21,42,70,0.12);"></span>
+        <span style="text-align:center;">Uma mesma metragem. Novas possibilidades.</span>
+        <span style="flex:1; height:1px; background:rgba(21,42,70,0.12);"></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="floor-01" data-screen-label="Andar 01" ref="{{ scrubWrap }}" style="background:#f7f5f2;">
+    <div ref="{{ scrubInner }}" style="display:flex; align-items:center;">
+    <div style="width:100%; max-width:1440px; margin-inline:auto; padding:clamp(72px,9vw,132px) 0 clamp(72px,9vw,132px) clamp(20px,4vw,48px); display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(32px,5vw,80px); align-items:center;">
+      <div style="padding-right:clamp(20px,3vw,40px);">
+        <div aria-hidden="true" style="font-family:Poppins, sans-serif; font-weight:700; font-size:clamp(110px,14vw,210px); line-height:0.8; letter-spacing:-0.045em; color:transparent; -webkit-text-stroke:1px rgba(250,107,9,0.55);">01</div>
+        <h2 style="margin:24px 0 0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.4vw,50px); line-height:1.06; letter-spacing:-0.025em; color:#152a46; max-width:22ch;">Uma sala pode esconder um quarto completo</h2>
+        <p style="margin:20px 0 0; max-width:38ch; font-size:clamp(16px,1.2vw,19px); font-weight:300; line-height:1.7; color:#4a5560;">Durante o dia, sala. Quando você precisa, quarto. A função muda. O espaço continua o mesmo.</p>
+      </div>
+      <div>
+        <div style="position:relative; aspect-ratio:16/9; background:#e8e5e0;">
+          <img src="public/floors/floor-01/closed-desktop.webp" alt="Sala com cama retrátil fechada" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+          <img ref="{{ fade01 }}" src="public/floors/floor-01/open-desktop.webp" alt="Mesmo ambiente com a cama retrátil aberta" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; clip-path:inset(0 100% 0 0); transition:clip-path 1.8s cubic-bezier(0.65,0,0.35,1);">
+          <span ref="{{ divider01 }}" aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:2px; margin-left:-1px; background:#fa6b09; opacity:0; z-index:2; box-shadow:0 0 18px rgba(250,107,9,0.5); transition:opacity 0.4s ease;"></span>
+        </div>
+        <div style="margin-top:14px; margin-right:clamp(20px,4vw,48px); display:flex; align-items:center; gap:16px; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#66707a;">
+          <span>Fechada — sala</span>
+          <span style="flex:1; height:1px; background:rgba(21,42,70,0.12);"></span>
+          <span style="color:#fa6b09;">Aberta — quarto</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section id="floor-02" data-screen-label="Andar 02" style="background:#fff;">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,9vw,132px) clamp(20px,4vw,48px) clamp(72px,9vw,132px) 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(32px,5vw,80px); align-items:center;">
+      <div>
+        <div style="position:relative; aspect-ratio:4/3; background:#e8e5e0;">
+          <img src="public/floors/floor-02/closed-desktop.webp" alt="Ambiente organizado, sem estação de trabalho à vista" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+          <img ref="{{ fade02 }}" src="public/floors/floor-02/open-desktop.webp" alt="Mesmo ambiente com home office retrátil aberto" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; clip-path:inset(0 100% 0 0); transition:clip-path 1.8s cubic-bezier(0.65,0,0.35,1);">
+        </div>
+        <div style="margin-top:14px; margin-left:clamp(20px,4vw,48px); display:flex; align-items:center; gap:16px; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#66707a;">
+          <span>Fim do expediente</span>
+          <span style="flex:1; height:1px; background:rgba(21,42,70,0.12);"></span>
+          <span style="color:#fa6b09;">Home office aberto</span>
+        </div>
+      </div>
+      <div>
+        <div aria-hidden="true" style="font-family:Poppins, sans-serif; font-weight:700; font-size:clamp(110px,14vw,210px); line-height:0.8; letter-spacing:-0.045em; color:transparent; -webkit-text-stroke:1px rgba(250,107,9,0.55);">02</div>
+        <h2 style="margin:24px 0 0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.4vw,50px); line-height:1.06; letter-spacing:-0.025em; color:#152a46; max-width:22ch;">Seu escritório não precisa ocupar espaço o dia inteiro</h2>
+        <p style="margin:20px 0 0; max-width:38ch; font-size:clamp(16px,1.2vw,19px); font-weight:300; line-height:1.7; color:#4a5560;">Trabalhe quando precisar. Depois, devolva o ambiente para a casa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="floor-03" data-screen-label="Andar 03" style="background:#f7f5f2;">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,9vw,132px) clamp(20px,4vw,48px) clamp(40px,5vw,64px); display:flex; align-items:flex-start; gap:clamp(20px,3vw,44px);">
+      <span aria-hidden="true" style="font-family:Poppins, sans-serif; font-weight:700; font-size:clamp(64px,7vw,120px); line-height:0.78; letter-spacing:-0.05em; color:transparent; -webkit-text-stroke:1px rgba(250,107,9,0.55);">03</span>
+      <div style="display:flex; flex-direction:column; gap:20px; padding-top:4px;">
+        <h2 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.4vw,50px); line-height:1.06; letter-spacing:-0.025em; color:#152a46; max-width:26ch;">Receber alguém não precisa exigir um quarto vazio o ano inteiro</h2>
+        <p style="margin:0; max-width:48ch; font-size:clamp(16px,1.2vw,19px); font-weight:300; line-height:1.7; color:#4a5560;">O ambiente funciona para a sua rotina todos os dias e se transforma quando alguém chega.</p>
+      </div>
+    </div>
+    <div style="position:relative; width:100%; aspect-ratio:21/9; background:#e8e5e0;">
+      <img src="public/floors/floor-03/everyday.webp" alt="Ambiente no uso cotidiano" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+      <img ref="{{ fade03 }}" src="public/floors/floor-03/hosting.webp" alt="Mesmo ambiente pronto para receber visitas" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; clip-path:inset(0 100% 0 0); transition:clip-path 1.8s cubic-bezier(0.65,0,0.35,1);">
+    </div>
+    <div style="max-width:1440px; margin-inline:auto; padding:14px clamp(20px,4vw,48px) clamp(72px,9vw,120px); display:flex; align-items:center; gap:16px; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#66707a;">
+      <span>Uso cotidiano</span>
+      <span style="flex:1; height:1px; background:rgba(21,42,70,0.12);"></span>
+      <span style="color:#fa6b09;">Pronto para receber</span>
+    </div>
+  </section>
+
+  <section id="floor-04" data-screen-label="Andar 04" style="background:#fff;">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,9vw,132px) clamp(20px,4vw,48px);">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(28px,5vw,80px); align-items:end;">
+        <div>
+          <div aria-hidden="true" style="font-family:Poppins, sans-serif; font-weight:700; font-size:clamp(110px,14vw,210px); line-height:0.8; letter-spacing:-0.045em; color:transparent; -webkit-text-stroke:1px rgba(250,107,9,0.55);">04</div>
+          <h2 style="margin:24px 0 0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.4vw,50px); line-height:1.06; letter-spacing:-0.025em; color:#152a46; max-width:24ch;">O mesmo ambiente pode acompanhar diferentes momentos do seu dia</h2>
+        </div>
+        <p style="margin:0; max-width:40ch; font-size:clamp(16px,1.2vw,19px); font-weight:300; line-height:1.7; color:#4a5560;">O espaço continua o mesmo. O jeito de usar muda com você.</p>
+      </div>
+
+      <div style="margin-top:clamp(40px,5vw,72px); display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:clamp(16px,2vw,28px); align-items:start;">
+        <figure style="margin:0; display:flex; flex-direction:column; gap:14px;">
+          <button type="button" onClick="{{ openMorning }}" aria-label="Ampliar imagem: Manhã — trabalho" style="position:relative; display:block; padding:0; border:0; background:none; cursor:zoom-in; overflow:hidden; width:100%;" style-hover="--zc:1;">
+            <img src="public/floors/floor-04/morning.webp" alt="Manhã — trabalho" style="display:block; width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform 1.2s cubic-bezier(0.22,1,0.36,1); transform:scale(var(--zs, 1));" style-hover="--zs:1.025;">
+            <span aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; padding:40px 16px 16px; background:linear-gradient(180deg, rgba(21,42,70,0) 0%, rgba(21,42,70,0.62) 100%); font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:#fff; text-align:left; opacity:var(--zc, 0); transition:opacity 0.5s ease;">Clique para ver</span>
+          </button>
+          <figcaption style="display:flex; align-items:center; gap:12px; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#66707a;"><span style="width:20px; height:1px; background:#fa6b09;"></span>Manhã — trabalho</figcaption>
+        </figure>
+        <figure style="margin:clamp(24px,4vw,56px) 0 0; display:flex; flex-direction:column; gap:14px;">
+          <button type="button" onClick="{{ openAfternoon }}" aria-label="Ampliar imagem: Tarde — convivência" style="position:relative; display:block; padding:0; border:0; background:none; cursor:zoom-in; overflow:hidden; width:100%;" style-hover="--zc:1;">
+            <img src="public/floors/floor-04/afternoon.webp" alt="Tarde — convivência" style="display:block; width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform 1.2s cubic-bezier(0.22,1,0.36,1); transform:scale(var(--zs, 1));" style-hover="--zs:1.025;">
+            <span aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; padding:40px 16px 16px; background:linear-gradient(180deg, rgba(21,42,70,0) 0%, rgba(21,42,70,0.62) 100%); font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:#fff; text-align:left; opacity:var(--zc, 0); transition:opacity 0.5s ease;">Clique para ver</span>
+          </button>
+          <figcaption style="display:flex; align-items:center; gap:12px; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#66707a;"><span style="width:20px; height:1px; background:#fa6b09;"></span>Tarde — convivência</figcaption>
+        </figure>
+        <figure style="margin:clamp(48px,8vw,112px) 0 0; display:flex; flex-direction:column; gap:14px;">
+          <button type="button" onClick="{{ openNight }}" aria-label="Ampliar imagem: Noite — descanso" style="position:relative; display:block; padding:0; border:0; background:none; cursor:zoom-in; overflow:hidden; width:100%;" style-hover="--zc:1;">
+            <img src="public/floors/floor-04/night.webp" alt="Noite — descanso" style="display:block; width:100%; aspect-ratio:3/4; object-fit:cover; transition:transform 1.2s cubic-bezier(0.22,1,0.36,1); transform:scale(var(--zs, 1));" style-hover="--zs:1.025;">
+            <span aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; padding:40px 16px 16px; background:linear-gradient(180deg, rgba(21,42,70,0) 0%, rgba(21,42,70,0.62) 100%); font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:#fff; text-align:left; opacity:var(--zc, 0); transition:opacity 0.5s ease;">Clique para ver</span>
+          </button>
+          <figcaption style="display:flex; align-items:center; gap:12px; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#66707a;"><span style="width:20px; height:1px; background:#fa6b09;"></span>Noite — descanso</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="floor-05" data-screen-label="Andar 05" style="position:relative; min-height:min(94vh,960px); display:flex; align-items:flex-end; background:#152a46; overflow:hidden;">
+    <img ref="{{ f5img }}" src="public/floors/floor-05/hero-desktop.webp" alt="Projeto completo Moduflexa" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1.15); will-change:transform;">
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(21,42,70,0.15) 0%, rgba(21,42,70,0.25) 40%, rgba(21,42,70,0.88) 100%);"></div>
+    <div style="position:relative; z-index:2; width:100%; max-width:1440px; margin-inline:auto; padding:clamp(64px,8vw,110px) clamp(20px,4vw,48px);">
+      <div style="display:flex; align-items:flex-start; gap:clamp(20px,3vw,44px);">
+        <span aria-hidden="true" style="font-family:Poppins, sans-serif; font-weight:700; font-size:clamp(64px,8vw,132px); line-height:0.78; letter-spacing:-0.05em; color:#fa6b09;">05</span>
+        <div style="display:flex; flex-direction:column; gap:22px; padding-top:6px;">
+          <h2 style="margin:0; font-family:Poppins, sans-serif; font-weight:600; font-size:clamp(32px,4.2vw,64px); line-height:1.02; letter-spacing:-0.03em; color:#fff; max-width:24ch;">Quando os móveis mudam, a metragem deixa de ser o limite</h2>
+          <p style="margin:0; max-width:54ch; font-size:clamp(16px,1.3vw,20px); font-weight:300; line-height:1.7; color:rgba(255,255,255,0.78); text-wrap:pretty;">Não é sobre encaixar mais móveis. É sobre pensar o ambiente inteiro para que cada elemento tenha uma função quando você precisa e libere espaço quando não precisa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Síntese" style="background:#f7f5f2;">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(96px,14vw,200px) clamp(20px,4vw,48px);">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:clamp(36px,6vw,96px); align-items:end;">
+        <h2 ref="{{ manifesto }}" style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(34px,4.6vw,72px); line-height:1.06; letter-spacing:-0.03em; color:#152a46; max-width:22ch;"><span data-mw style="color:rgba(21,42,70,0.16); transition:color 0.45s ease;">Não</span> <span data-mw style="color:rgba(21,42,70,0.16); transition:color 0.45s ease;">é</span> <span data-mw style="color:rgba(21,42,70,0.16); transition:color 0.45s ease;">sobre</span> <span data-mw style="color:rgba(21,42,70,0.16); transition:color 0.45s ease;">colocar</span> <span data-mw style="color:rgba(21,42,70,0.16); transition:color 0.45s ease;">mais</span> <span data-mw style="color:rgba(21,42,70,0.16); transition:color 0.45s ease;">coisas</span> <span data-mw style="color:rgba(21,42,70,0.16); transition:color 0.45s ease;">em</span> <span data-mw style="color:rgba(21,42,70,0.16); transition:color 0.45s ease;">menos</span> <span data-mw style="color:rgba(21,42,70,0.16); transition:color 0.45s ease;">espaço</span></h2>
+        <div style="display:flex; flex-direction:column; gap:clamp(20px,2.4vw,32px);">
+          <span style="display:block; width:100%; height:1px; background:#fa6b09;"></span>
+          <p style="margin:0; max-width:34ch; font-size:clamp(19px,1.8vw,30px); font-weight:300; line-height:1.45; color:#3f4a55; text-wrap:pretty;">É sobre fazer cada metro quadrado trabalhar melhor para você.</p>
+        </div>
+      </div>
+      <div style="margin-top:clamp(56px,7vw,104px); border-top:1px solid rgba(21,42,70,0.12); padding-top:24px; display:flex; flex-wrap:wrap; gap:16px 40px; justify-content:space-between; align-items:baseline; font-family:Poppins, sans-serif; font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;">
+        <span style="color:#4d7392;">Funcional quando precisa. Bonito o tempo inteiro.</span>
+        <span style="color:#7b8590;">Inteligência de espaço sem abrir mão do design</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="solucoes" data-screen-label="Diferenciais" style="background:#fff; border-top:1px solid rgba(21,42,70,0.08);">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,9vw,140px) clamp(20px,4vw,48px);">
+      <h2 style="margin:0; max-width:20ch; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.6vw,54px); line-height:1.06; letter-spacing:-0.025em; color:#152a46;">Soluções pensadas para transformar a rotina</h2>
+      <div style="margin-top:clamp(48px,6vw,88px); display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(32px,4vw,64px) clamp(32px,5vw,96px);">
+        <div style="border-top:1px solid rgba(21,42,70,0.14); padding-top:24px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">
+          <span style="font-family:Poppins, sans-serif; font-weight:700; font-size:44px; line-height:1; letter-spacing:-0.04em; color:transparent; -webkit-text-stroke:1px rgba(250,107,9,0.7);">01</span>
+          <h3 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:22px; line-height:1.25; color:#152a46;">Melhor aproveitamento do espaço</h3>
+          <p style="margin:0; max-width:34ch; font-size:16px; font-weight:300; line-height:1.7; color:#4a5560;">A solução é pensada para liberar ou transformar áreas do ambiente.</p>
+        </div>
+        <div style="border-top:1px solid rgba(21,42,70,0.14); padding-top:24px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">
+          <span style="font-family:Poppins, sans-serif; font-weight:700; font-size:44px; line-height:1; letter-spacing:-0.04em; color:transparent; -webkit-text-stroke:1px rgba(250,107,9,0.7);">02</span>
+          <h3 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:22px; line-height:1.25; color:#152a46;">Função sem abrir mão do design</h3>
+          <p style="margin:0; max-width:34ch; font-size:16px; font-weight:300; line-height:1.7; color:#4a5560;">A identidade da marca já estabelece esse equilíbrio entre funcionalidade e estética.</p>
+        </div>
+        <div style="border-top:1px solid rgba(21,42,70,0.14); padding-top:24px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">
+          <span style="font-family:Poppins, sans-serif; font-weight:700; font-size:44px; line-height:1; letter-spacing:-0.04em; color:transparent; -webkit-text-stroke:1px rgba(250,107,9,0.7);">03</span>
+          <h3 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:22px; line-height:1.25; color:#152a46;">Soluções para diferentes rotinas</h3>
+          <p style="margin:0; max-width:34ch; font-size:16px; font-weight:300; line-height:1.7; color:#4a5560;">Não existe apenas uma forma de utilizar um apartamento compacto.</p>
+        </div>
+        <div style="border-top:1px solid rgba(21,42,70,0.14); padding-top:24px; display:flex; flex-direction:column; gap:14px; overflow:hidden;">
+          <span style="font-family:Poppins, sans-serif; font-weight:700; font-size:44px; line-height:1; letter-spacing:-0.04em; color:transparent; -webkit-text-stroke:1px rgba(250,107,9,0.7);">04</span>
+          <h3 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:22px; line-height:1.25; color:#152a46;">Mais do que camas retráteis</h3>
+          <p style="margin:0; max-width:34ch; font-size:16px; font-weight:300; line-height:1.7; color:#4a5560;">A comunicação atual da marca já contempla também mesas, armários e complementos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="produtos" data-screen-label="Produtos" style="background:#f7f5f2; border-top:1px solid rgba(21,42,70,0.08);">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,9vw,140px) clamp(20px,4vw,48px);">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(28px,5vw,88px); align-items:end;">
+        <h2 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.8vw,56px); line-height:1.05; letter-spacing:-0.025em; color:#152a46; max-width:16ch;">Nossos produtos</h2>
+        <p style="margin:0; max-width:42ch; font-size:clamp(16px,1.25vw,19px); font-weight:300; line-height:1.7; color:#4a5560; text-wrap:pretty;">Quatro configurações de cama retrátil, em versões casal e solteiro, para diferentes larguras de ambiente.</p>
+      </div>
+
+      <div style="margin-top:clamp(44px,6vw,88px); display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:clamp(20px,2.5vw,36px);">
+
+        <article style="display:flex; flex-direction:column; gap:18px;">
+          <div style="position:relative; aspect-ratio:1/1; background:#faf5ee; overflow:hidden;">
+            <img src="public/produtos/prime-casal.png" alt="Prime Casal — cama retrátil aberta, acabamento em madeira" style="display:block; width:100%; height:100%; object-fit:cover; transition:transform 1.2s cubic-bezier(0.22,1,0.36,1);" style-hover="transform:scale(1.03);">
+          </div>
+          <div style="border-top:1px solid rgba(21,42,70,0.14); padding-top:18px; display:flex; flex-direction:column; gap:10px;">
+            <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fa6b09;">Linha Prime</span>
+            <h3 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(20px,1.8vw,26px); line-height:1.2; letter-spacing:-0.02em; color:#152a46;">Prime Casal</h3>
+            <p style="margin:0; font-size:15px; font-weight:300; line-height:1.65; color:#4a5560; text-wrap:pretty;">O topo da linha Moduflexa. Acabamento em madeira nobre, mecanismo silencioso de alta precisão e design que eleva qualquer ambiente.</p>
+            <p style="margin:0; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#152a46;">Casal — 1,38m</p>
+            <a href="#contato" style="margin-top:4px; display:inline-flex; align-items:center; align-self:flex-start; min-height:48px; padding:0 24px; border-radius:999px; border:1px solid #152a46; font-family:Poppins, sans-serif; font-size:13px; font-weight:600; color:#152a46; transition:background 0.35s ease, border-color 0.35s ease, color 0.35s ease;" style-hover="background:#fa6b09; border-color:#fa6b09; color:#fff;">Solicitar orçamento</a>
+          </div>
+        </article>
+
+        <article style="display:flex; flex-direction:column; gap:18px;">
+          <div style="position:relative; aspect-ratio:1/1; background:#faf5ee; overflow:hidden;">
+            <img src="public/produtos/prime-solteiro.png" alt="Prime Solteiro — cama retrátil aberta, acabamento em madeira" style="display:block; width:100%; height:100%; object-fit:cover; transition:transform 1.2s cubic-bezier(0.22,1,0.36,1);" style-hover="transform:scale(1.03);">
+          </div>
+          <div style="border-top:1px solid rgba(21,42,70,0.14); padding-top:18px; display:flex; flex-direction:column; gap:10px;">
+            <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fa6b09;">Linha Prime</span>
+            <h3 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(20px,1.8vw,26px); line-height:1.2; letter-spacing:-0.02em; color:#152a46;">Prime Solteiro</h3>
+            <p style="margin:0; font-size:15px; font-weight:300; line-height:1.65; color:#4a5560; text-wrap:pretty;">A mesma sofisticação em tamanho compacto.</p>
+            <p style="margin:0; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#152a46;">Solteiro — 0,88m</p>
+            <a href="#contato" style="margin-top:4px; display:inline-flex; align-items:center; align-self:flex-start; min-height:48px; padding:0 24px; border-radius:999px; border:1px solid #152a46; font-family:Poppins, sans-serif; font-size:13px; font-weight:600; color:#152a46; transition:background 0.35s ease, border-color 0.35s ease, color 0.35s ease;" style-hover="background:#fa6b09; border-color:#fa6b09; color:#fff;">Solicitar orçamento</a>
+          </div>
+        </article>
+
+        <article style="display:flex; flex-direction:column; gap:18px;">
+          <div style="position:relative; aspect-ratio:1/1; background:#faf5ee; overflow:hidden;">
+            <img src="public/produtos/economic-plus-casal.png" alt="Economic Plus Casal — estrutura retrátil aberta" style="display:block; width:100%; height:100%; object-fit:cover; transition:transform 1.2s cubic-bezier(0.22,1,0.36,1);" style-hover="transform:scale(1.03);">
+          </div>
+          <div style="border-top:1px solid rgba(21,42,70,0.14); padding-top:18px; display:flex; flex-direction:column; gap:10px;">
+            <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fa6b09;">Linha Economic Plus</span>
+            <h3 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(20px,1.8vw,26px); line-height:1.2; letter-spacing:-0.02em; color:#152a46;">Economic Plus Casal</h3>
+            <p style="margin:0; font-size:15px; font-weight:300; line-height:1.65; color:#4a5560; text-wrap:pretty;">Toda a praticidade com o melhor preço.</p>
+            <p style="margin:0; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#152a46;">Casal — 1,38m</p>
+            <a href="#contato" style="margin-top:4px; display:inline-flex; align-items:center; align-self:flex-start; min-height:48px; padding:0 24px; border-radius:999px; border:1px solid #152a46; font-family:Poppins, sans-serif; font-size:13px; font-weight:600; color:#152a46; transition:background 0.35s ease, border-color 0.35s ease, color 0.35s ease;" style-hover="background:#fa6b09; border-color:#fa6b09; color:#fff;">Solicitar orçamento</a>
+          </div>
+        </article>
+
+        <article style="display:flex; flex-direction:column; gap:18px;">
+          <div style="position:relative; aspect-ratio:1/1; background:#faf5ee; overflow:hidden;">
+            <img src="public/produtos/economic-plus-solteiro.png" alt="Economic Plus Solteiro — cama retrátil aberta" style="display:block; width:100%; height:100%; object-fit:cover; transition:transform 1.2s cubic-bezier(0.22,1,0.36,1);" style-hover="transform:scale(1.03);">
+          </div>
+          <div style="border-top:1px solid rgba(21,42,70,0.14); padding-top:18px; display:flex; flex-direction:column; gap:10px;">
+            <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fa6b09;">Linha Economic Plus</span>
+            <h3 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(20px,1.8vw,26px); line-height:1.2; letter-spacing:-0.02em; color:#152a46;">Economic Plus Solteiro</h3>
+            <p style="margin:0; font-size:15px; font-weight:300; line-height:1.65; color:#4a5560; text-wrap:pretty;">Solução acessível para qualquer espaço.</p>
+            <p style="margin:0; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#152a46;">Solteiro — 0,88m</p>
+            <a href="#contato" style="margin-top:4px; display:inline-flex; align-items:center; align-self:flex-start; min-height:48px; padding:0 24px; border-radius:999px; border:1px solid #152a46; font-family:Poppins, sans-serif; font-size:13px; font-weight:600; color:#152a46; transition:background 0.35s ease, border-color 0.35s ease, color 0.35s ease;" style-hover="background:#fa6b09; border-color:#fa6b09; color:#fff;">Solicitar orçamento</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="unidades" data-screen-label="Unidades" style="background:#f7f5f2;">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,9vw,140px) clamp(20px,4vw,48px);">
+      <div style="max-width:44ch; display:flex; flex-direction:column; gap:20px;">
+        <h2 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.8vw,58px); line-height:1.05; letter-spacing:-0.025em; color:#152a46;">Agora imagine isso na sua casa</h2>
+        <p style="margin:0; font-size:clamp(16px,1.25vw,19px); font-weight:300; line-height:1.7; color:#4a5560;">Conheça uma unidade Moduflexa e veja as soluções funcionando de perto.</p>
+      </div>
+
+      <div style="margin-top:clamp(40px,5vw,72px); background:#fff; border:1px solid rgba(21,42,70,0.1); display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+        <div style="position:relative; min-height:320px; overflow:hidden; background:#152a46;">
+          <img src="public/unidades/perdizes.jpg" alt="Fachada do showroom Moduflexa em Perdizes, iluminada à noite" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 1.4s cubic-bezier(0.22,1,0.36,1);" style-hover="transform:scale(1.04);">
+        </div>
+        <div style="padding:clamp(28px,4vw,56px); display:flex; flex-direction:column; gap:24px;">
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <span style="font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fa6b09;">Unidade 01</span>
+            <h3 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(24px,2.4vw,34px); line-height:1.15; letter-spacing:-0.02em; color:#152a46;">Moduflexa Pompéia</h3>
+            <p style="margin:0; font-size:16px; font-weight:300; color:#4a5560;">Perdizes, São Paulo – SP</p>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; border-top:1px solid rgba(21,42,70,0.1); padding-top:22px;">
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#7b8590;">Endereço</span>
+              <span style="font-size:15px; font-weight:300; color:#3f4a55;">Rua Desembargador do Vale, 1014, São Paulo, Brazil 0501040</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#7b8590;">Horário</span>
+              <span style="font-size:15px; font-weight:300; color:#3f4a55;">Segunda a Sábado, 09h00 às 18h00</span>
+            </div>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center; font-family:Poppins, sans-serif; padding-top:4px;">
+            <a href="https://wa.me/5511936233568?text=Vi%20o%20site%20da%20moduflexa%20e%20gostaria%20de%20mais%20informacoes." target="_blank" rel="noreferrer" style="display:inline-flex; align-items:center; min-height:52px; padding:0 30px; border-radius:999px; background:#fa6b09; color:#fff; font-size:14px; font-weight:600;" style-hover="background:#d74e01;">Falar no WhatsApp</a>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Desembargador%20do%20Vale%2C%201014%2C%20Perdizes%2C%20São%20Paulo%20-%20SP" target="_blank" rel="noreferrer" style="display:inline-flex; align-items:center; min-height:52px; padding:0 30px; border-radius:999px; border:1px solid #152a46; color:#152a46; font-size:14px; font-weight:600;">Como chegar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" data-screen-label="Contato" style="background:#fff; border-top:1px solid rgba(21,42,70,0.08);">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,9vw,140px) clamp(20px,4vw,48px); display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(40px,6vw,96px); align-items:start;">
+      <div style="display:flex; flex-direction:column; gap:22px;">
+        <h2 style="margin:0; max-width:20ch; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.8vw,56px); line-height:1.05; letter-spacing:-0.025em; color:#152a46;">Qual espaço da sua casa poderia fazer mais?</h2>
+        <p style="margin:0; max-width:40ch; font-size:clamp(16px,1.25vw,19px); font-weight:300; line-height:1.7; color:#4a5560;">Fale com a Moduflexa e descubra o que cabe na sua rotina.</p>
+      </div>
+      <form onSubmit="{{ onSubmit }}" style="display:flex; flex-direction:column; gap:22px; max-width:520px;">
+        <label style="display:flex; flex-direction:column; gap:8px;">
+          <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#7b8590;">Nome</span>
+          <input type="text" name="nome" style="border:0; border-bottom:1px solid rgba(21,42,70,0.2); background:transparent; padding:12px 0; font-size:17px; font-weight:300; color:#18212a; min-height:48px;">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:8px;">
+          <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#7b8590;">WhatsApp</span>
+          <input type="tel" name="whatsapp" style="border:0; border-bottom:1px solid rgba(21,42,70,0.2); background:transparent; padding:12px 0; font-size:17px; font-weight:300; color:#18212a; min-height:48px;">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:8px;">
+          <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#7b8590;">Cidade</span>
+          <input type="text" name="cidade" style="border:0; border-bottom:1px solid rgba(21,42,70,0.2); background:transparent; padding:12px 0; font-size:17px; font-weight:300; color:#18212a; min-height:48px;">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:8px;">
+          <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#7b8590;">Mensagem</span>
+          <textarea name="mensagem" rows="3" style="border:0; border-bottom:1px solid rgba(21,42,70,0.2); background:transparent; padding:12px 0; font-size:17px; font-weight:300; color:#18212a; resize:vertical;"></textarea>
+        </label>
+        <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap; padding-top:6px;">
+          <button type="submit" style="font-family:Poppins, sans-serif; border:0; cursor:pointer; display:inline-flex; align-items:center; min-height:54px; padding:0 32px; border-radius:999px; background:#fa6b09; color:#fff; font-size:14px; font-weight:600;" style-hover="background:#d74e01;">Fale com a Moduflexa</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <a href="https://wa.me/5511936233568?text=Vi%20o%20site%20da%20moduflexa%20e%20gostaria%20de%20mais%20informacoes." target="_blank" rel="noreferrer" aria-label="Falar com a Moduflexa no WhatsApp" style="position:fixed; right:clamp(16px,2.5vw,32px); bottom:clamp(16px,2.5vw,32px); z-index:80; display:flex; align-items:center; gap:0; height:60px; padding:0 18px; border-radius:999px; background:#25d366; color:#fff; box-shadow:0 10px 30px rgba(21,42,70,0.28); overflow:hidden; transition:box-shadow 0.35s ease, gap 0.45s cubic-bezier(0.22,1,0.36,1);" style-hover="box-shadow:0 14px 38px rgba(21,42,70,0.36); gap:10px; --wl:1; --wm:190px;">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true" style="flex:none;"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.78.96-.96 1.16-.18.2-.35.22-.65.08-.3-.15-1.13-.42-2.16-1.33-.8-.72-1.34-1.6-1.5-1.9-.15-.3-.01-.47.14-.62.15-.15.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.07-.15-.6-1.45-.83-1.98-.22-.53-.44-.46-.6-.46h-.55c-.2 0-.5.07-.76.37-.26.3-1 .97-1 2.37s1.02 2.75 1.17 2.95c.15.2 2 3.18 4.86 4.33 2.86 1.15 2.86.77 3.38.72.52-.05 1.68-.68 1.92-1.35.24-.67.24-1.24.17-1.36-.07-.12-.27-.2-.57-.35zM12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.06L2 22l5.06-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18.13c-1.66 0-3.2-.48-4.5-1.32l-.32-.2-2.7.71.72-2.63-.21-.34A7.9 7.9 0 0 1 3.87 12C3.87 7.52 7.52 3.87 12 3.87S20.13 7.52 20.13 12 16.48 20.13 12 20.13z"/></svg>
+    <span style="max-width:var(--wm, 0px); opacity:var(--wl, 0); white-space:nowrap; font-family:Poppins, sans-serif; font-size:14px; font-weight:600; transition:max-width 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;">Fale com a gente</span>
+  </a>
+
+  <div ref="{{ lb }}" role="dialog" aria-modal="true" aria-label="Imagem ampliada" onClick="{{ closeLb }}" style="position:fixed; inset:0; z-index:90; display:none; align-items:center; justify-content:center; padding:clamp(20px,5vw,64px); background:rgba(21,42,70,0.92); opacity:0; transition:opacity 0.45s ease; cursor:zoom-out;">
+    <button type="button" onClick="{{ closeLb }}" aria-label="Fechar" style="position:absolute; top:clamp(16px,3vw,32px); right:clamp(16px,3vw,32px); width:48px; height:48px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.35); border-radius:999px; background:none; color:#fff; font-family:Poppins, sans-serif; font-size:18px; cursor:pointer; transition:border-color 0.3s ease, background 0.3s ease;" style-hover="border-color:#fa6b09; background:#fa6b09;">×</button>
+    <figure ref="{{ lbFig }}" style="margin:0; display:flex; flex-direction:column; gap:16px; align-items:center; max-height:100%; transform:scale(0.96); transition:transform 0.55s cubic-bezier(0.22,1,0.36,1);">
+      <img ref="{{ lbImg }}" alt="" style="display:block; max-width:100%; max-height:78vh; width:auto; object-fit:contain;">
+      <figcaption ref="{{ lbCap }}" style="font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.75);"></figcaption>
+    </figure>
+  </div>
+
+  <footer data-screen-label="Footer" style="background:#152a46; color:rgba(255,255,255,0.75);">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px) 0;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:clamp(32px,4vw,64px);">
+        <div style="display:flex; flex-direction:column; gap:18px;">
+          <img src="public/brand/logo-light.png" alt="Moduflexa" style="display:block; height:30px; width:auto; align-self:flex-start; flex:none;">
+          <p style="margin:0; max-width:30ch; font-size:15px; font-weight:300; line-height:1.6;">Móveis flexíveis para espaços que mudam com você.</p>
+        </div>
+        <nav style="display:flex; flex-direction:column; gap:10px; font-size:15px; font-weight:300;">
+          <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.45);">Navegação</span>
+          <a href="#ambientes" style="color:rgba(255,255,255,0.75);" style-hover="color:#fff;">Ambientes</a>
+          <a href="#solucoes" style="color:rgba(255,255,255,0.75);" style-hover="color:#fff;">Soluções</a>
+          <a href="#produtos" style="color:rgba(255,255,255,0.75);" style-hover="color:#fff;">Produtos</a>
+          <a href="#unidades" style="color:rgba(255,255,255,0.75);" style-hover="color:#fff;">Unidades</a>
+          <a href="#contato" style="color:rgba(255,255,255,0.75);" style-hover="color:#fff;">Contato</a>
+        </nav>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:15px; font-weight:300;">
+          <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.45);">Unidade</span>
+          <a href="#unidades" style="color:rgba(255,255,255,0.75);" style-hover="color:#fff;">Moduflexa Pompéia — São Paulo/SP</a>
+          <a href="https://wa.me/5511936233568?text=Vi%20o%20site%20da%20moduflexa%20e%20gostaria%20de%20mais%20informacoes." target="_blank" rel="noreferrer" style="color:rgba(255,255,255,0.75);" style-hover="color:#fff;">WhatsApp (11) 93623-3568</a>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:15px; font-weight:300;">
+          <span style="font-family:Poppins, sans-serif; font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.45);">Redes</span>
+          <span>[TBD] Instagram</span>
+          <span>[TBD] Política de privacidade</span>
+        </div>
+      </div>
+      <div style="margin-top:clamp(48px,6vw,88px); border-top:1px solid rgba(255,255,255,0.12); padding:24px 0 32px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; font-size:12px;">
+        <span>© 2026 Moduflexa. Todos os direitos reservados.</span>
+        <span style="font-family:Poppins, sans-serif; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.4);">A cama levanta com você.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sent: false };
+    this.els = {};
+    this.ios = [];
+    this.reduce = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Wipe reveal for the before/after pairs: the "open" frame sweeps across
+    // the same framing, so the transformation reads as one motion.
+    // Auto-cycling before/after: while the pair is on screen the "open"
+    // frame wipes in, holds, and wipes back — both states always get seen.
+    this.cyc = {};
+    this.makeWipe = (key) => (el) => {
+      if (!el || this.els[key] === el) return;
+      this.els[key] = el;
+      if (this.reduce) { el.style.clipPath = "inset(0 0 0 0)"; return; }
+      el.style.transition = "none";
+      this.cyc[key] = { t: 0, on: false };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { this.cyc[key].on = e.isIntersecting; });
+      }, { threshold: 0.01, rootMargin: "0px 0px -8% 0px" });
+      io.observe(el.parentElement || el);
+      this.ios.push(io);
+    };
+    this.r01 = this.makeWipe("f1");
+    this.r02 = this.makeWipe("f2");
+    this.r03 = this.makeWipe("f3");
+
+    this.keep = (key) => (el) => { if (el) this.els[key] = el; };
+    this.setRoot = (el) => { if (el && this.root !== el) { this.root = el; this.boot(); } };
+    this.onSubmit = (e) => { e.preventDefault(); this.setState({ sent: true }); };
+
+    this.openLb = (src, cap) => () => {
+      const { lb, lbImg, lbCap, lbFig } = this.els;
+      if (!lb) return;
+      if (lbImg) { lbImg.src = src; lbImg.alt = cap; }
+      if (lbCap) lbCap.textContent = cap;
+      lb.style.display = "flex";
+      void lb.offsetHeight;
+      lb.style.opacity = "1";
+      if (lbFig) lbFig.style.transform = "scale(1)";
+      document.body.style.overflow = "hidden";
+    };
+    this.closeLb = (e) => {
+      if (e && e.stopPropagation) e.stopPropagation();
+      const { lb, lbFig } = this.els;
+      if (!lb) return;
+      lb.style.opacity = "0";
+      if (lbFig) lbFig.style.transform = "scale(0.96)";
+      document.body.style.overflow = "";
+      setTimeout(() => { if (lb.style.opacity === "0") lb.style.display = "none"; }, 460);
+    };
+    this.onKey = (e) => { if (e.key === "Escape") this.closeLb(); };
+  }
+
+  boot() {
+    requestAnimationFrame(() => {
+      this.setupReveals();
+      this.setupRail();
+      this.setupNums();
+      this.heroEntry();
+      this.onScroll();
+    });
+    this.scrollHandler = () => {
+      if (this.raf) return;
+      this.raf = requestAnimationFrame(() => { this.raf = 0; this.onScroll(); });
+    };
+    addEventListener("scroll", this.scrollHandler, { passive: true });
+    addEventListener("resize", this.scrollHandler, { passive: true });
+    addEventListener("keydown", this.onKey);
+    const tick = () => { this.frame(); this.loopId = requestAnimationFrame(tick); };
+    this.loopId = requestAnimationFrame(tick);
+  }
+
+  // Continuous loop: smoothed scroll value gives every scroll-linked effect
+  // a light inertia without hijacking native scrolling.
+  frame() {
+    if (!this.root) return;
+    const vh = innerHeight, y = scrollY;
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const c01 = (v) => Math.max(0, Math.min(1, v));
+    const { heroImg, heroContent, scrubWrap, scrubInner, divider01, f5img, manifesto, f1 } = this.els;
+
+    this.sy = this.sy === undefined ? y : lerp(this.sy, y, 0.16);
+    if (Math.abs(this.sy - y) < 0.2) this.sy = y;
+
+    if (!this.reduce) {
+      if (heroImg) heroImg.style.transform = `translate3d(0,${(Math.max(0, this.sy) * 0.14).toFixed(2)}px,0)`;
+      if (heroContent) {
+        const hero = this.root.querySelector("#inicio");
+        const hh = hero ? hero.offsetHeight : 700;
+        heroContent.style.opacity = String(Math.max(0, 1 - this.sy / (hh * 0.75)));
+        heroContent.style.transform = `translate3d(0,${(Math.min(this.sy, hh) * -0.05).toFixed(2)}px,0)`;
+      }
+    }
+
+    const now = performance.now();
+    const dt = this.lt ? Math.min(60, now - this.lt) : 16;
+    this.lt = now;
+    if (!this.reduce) {
+      const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+      ["f1", "f2", "f3"].forEach((k) => {
+        const el = this.els[k], st = this.cyc[k];
+        if (!el || !st) return;
+        if (st.on) st.t = (st.t + dt) % 6200;
+        const t = st.t;
+        let p;
+        if (t < 300) p = 0;
+        else if (t < 1700) p = ease((t - 300) / 1400);
+        else if (t < 4600) p = 1;
+        else p = 1 - ease((t - 4600) / 1600);
+        el.style.clipPath = `inset(0 ${((1 - p) * 100).toFixed(2)}% 0 0)`;
+        if (k === "f1" && divider01) {
+          divider01.style.left = `${(p * 100).toFixed(2)}%`;
+          divider01.style.opacity = st.on && p > 0.01 && p < 0.99 ? "1" : "0";
+        }
+      });
+    }
+
+    if (f5img) {
+      const sec = this.root.querySelector("#floor-05");
+      if (sec) {
+        const r = sec.getBoundingClientRect();
+        const p = this.reduce ? 1 : c01((vh - r.top) / (vh + r.height));
+        this.p5 = this.p5 === undefined ? p : lerp(this.p5, p, 0.1);
+        f5img.style.transform = `scale(${(1.15 - 0.15 * this.p5).toFixed(4)})`;
+      }
+    }
+
+    if (manifesto) {
+      if (!this.words) this.words = Array.from(manifesto.querySelectorAll("[data-mw]"));
+      const r = manifesto.getBoundingClientRect();
+      const p = this.reduce ? 1 : c01((vh * 0.85 - r.top) / (vh * 0.5));
+      const n = Math.round(p * this.words.length);
+      this.words.forEach((w, i) => { w.style.color = i < n ? "#152a46" : "rgba(21,42,70,0.16)"; });
+    }
+
+    if (this.nums && !this.reduce) {
+      this.nums.forEach((o) => {
+        const r = o.el.getBoundingClientRect();
+        if (r.bottom < -120 || r.top > vh + 120) return;
+        const center = r.top + r.height / 2 - o.ty;
+        const target = Math.max(-70, Math.min(70, (vh / 2 - center) * 0.12));
+        o.ty = lerp(o.ty, target, 0.12);
+        o.el.style.transform = `translateY(${o.ty.toFixed(2)}px)`;
+      });
+    }
+  }
+
+  setupNums() {
+    if (!this.root) return;
+    const els = Array.from(
+      this.root.querySelectorAll('section div[aria-hidden="true"], section span[aria-hidden="true"]')
+    ).filter((el) => /^0[1-5]$/.test((el.textContent || "").trim()));
+    this.nums = els.map((el) => ({ el, ty: 0 }));
+  }
+
+  heroEntry() {
+    if (this.reduce || !this.root) return;
+    const content = this.els.heroContent;
+    const h1 = this.els.heroH1;
+    if (!content) return;
+    const eyebrow = content.querySelector("span");
+    const firstCta = content.querySelector("a");
+    const ctas = firstCta ? firstCta.parentElement : null;
+    const side = content.querySelector("p");
+    const items = [
+      { el: eyebrow, d: 80, t: "translateY(22px)" },
+      { el: h1, d: 200, t: "translateY(105%)" },
+      { el: ctas, d: 560, t: "translateY(24px)" },
+      { el: side, d: 720, t: "translateY(24px)" },
+    ].filter((o) => o.el);
+    items.forEach((o) => {
+      if (o.el !== h1) o.el.style.opacity = "0";
+      o.el.style.transform = o.t;
+    });
+    void content.offsetHeight;
+    requestAnimationFrame(() => {
+      items.forEach((o) => {
+        o.el.style.transition = `opacity 1s cubic-bezier(0.22,1,0.36,1) ${o.d}ms, transform 1.15s cubic-bezier(0.22,1,0.36,1) ${o.d}ms`;
+        o.el.style.opacity = "1";
+        o.el.style.transform = "none";
+      });
+    });
+  }
+
+  setupReveals() {
+    if (this.reduce || !this.root) return;
+    const sel = 'h1,h2,h3,p,figure,form,label,span[aria-hidden="true"],div[aria-hidden="true"]';
+    let nodes = Array.from(this.root.querySelectorAll(sel)).filter(
+      (el) =>
+        !el.closest("header") &&
+        !el.closest("nav") &&
+        !el.closest("#inicio") &&
+        el !== this.els.divider01 &&
+        !/^0[1-5]$/.test((el.getAttribute("aria-hidden") ? el.textContent || "" : "x").trim()) &&
+        el.offsetParent !== null
+    );
+    nodes = nodes.filter((el) => !nodes.some((o) => o !== el && o.contains(el)));
+
+    const counts = new Map();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.style.opacity = "1";
+        e.target.style.transform = "none";
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+
+    nodes.forEach((el) => {
+      const group = el.closest("section, footer") || this.root;
+      const i = counts.get(group) || 0;
+      counts.set(group, i + 1);
+      const delay = Math.min(i, 5) * 85;
+      el.style.opacity = "0";
+      el.style.transform = "translateY(26px)";
+      el.style.transition =
+        `opacity 0.95s cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 1.05s cubic-bezier(0.22,1,0.36,1) ${delay}ms`;
+      io.observe(el);
+    });
+    this.ios.push(io);
+  }
+
+  setupRail() {
+    const rail = this.els.rail;
+    if (!rail || !this.root) return;
+    const items = Array.from(rail.querySelectorAll("[data-rail]"));
+    const floors = items
+      .map((it) => this.root.querySelector("#floor-0" + it.getAttribute("data-rail")))
+      .filter(Boolean);
+    const setActive = (n) => {
+      items.forEach((it) => {
+        const on = it.getAttribute("data-rail") === String(n);
+        it.style.setProperty("--rail-fg", on ? "#fa6b09" : "rgba(21,42,70,0.32)");
+        it.style.setProperty("--rail-w", on ? "34px" : "14px");
+        it.style.setProperty("--rail-lo", on ? "1" : "0");
+      });
+    };
+    setActive(1);
+    const io = new IntersectionObserver((entries) => {
+      let best = null;
+      entries.forEach((e) => {
+        if (e.isIntersecting && (!best || e.intersectionRatio > best.intersectionRatio)) best = e;
+      });
+      if (best) setActive(best.target.id.replace("floor-0", ""));
+    }, { threshold: [0.25, 0.5, 0.75] });
+    floors.forEach((f) => io.observe(f));
+    this.ios.push(io);
+  }
+
+  onScroll() {
+    const y = scrollY || 0;
+    const hero = this.root && this.root.querySelector("#inicio");
+    const heroH = hero ? hero.offsetHeight : 700;
+    const { heroImg, heroContent, hdr, logoLight, logoDark, topScrim, rail } = this.els;
+
+    const solid = y > heroH - 120;
+    if (hdr) {
+      hdr.style.background = solid ? "rgba(247,245,242,0.94)" : "transparent";
+      hdr.style.borderBottomColor = solid ? "rgba(21,42,70,0.1)" : "transparent";
+      hdr.style.setProperty("--hdr-fg", solid ? "#152a46" : "rgba(255,255,255,0.9)");
+      hdr.style.setProperty("--hdr-line", solid ? "rgba(21,42,70,0.32)" : "rgba(255,255,255,0.5)");
+    }
+    if (logoLight) logoLight.style.opacity = solid ? "0" : "1";
+    if (logoDark) logoDark.style.opacity = solid ? "1" : "0";
+    if (topScrim) topScrim.style.opacity = solid ? "0" : "1";
+
+    if (rail) {
+      const wide = innerWidth >= 1024;
+      rail.style.display = wide ? "flex" : "none";
+      const last = this.root && this.root.querySelector("#floor-05");
+      const end = last ? last.offsetTop + last.offsetHeight - innerHeight * 0.4 : Infinity;
+      rail.style.opacity = wide && y > heroH * 0.7 && y < end ? "1" : "0";
+    }
+  }
+
+  componentWillUnmount() {
+    this.ios.forEach((io) => io.disconnect());
+    if (this.loopId) cancelAnimationFrame(this.loopId);
+    if (this.scrollHandler) {
+      removeEventListener("scroll", this.scrollHandler);
+      removeEventListener("resize", this.scrollHandler);
+    }
+    removeEventListener("keydown", this.onKey);
+    document.body.style.overflow = "";
+  }
+
+  renderVals() {
+    return {
+      root: this.setRoot,
+      fade01: this.r01,
+      fade02: this.r02,
+      fade03: this.r03,
+      heroImg: this.keep("heroImg"),
+      heroContent: this.keep("heroContent"),
+      hdr: this.keep("hdr"),
+      logoLight: this.keep("logoLight"),
+      logoDark: this.keep("logoDark"),
+      topScrim: this.keep("topScrim"),
+      rail: this.keep("rail"),
+      scrubWrap: this.keep("scrubWrap"),
+      scrubInner: this.keep("scrubInner"),
+      divider01: this.keep("divider01"),
+      heroH1: this.keep("heroH1"),
+      manifesto: this.keep("manifesto"),
+      f5img: this.keep("f5img"),
+      lb: this.keep("lb"),
+      lbImg: this.keep("lbImg"),
+      lbCap: this.keep("lbCap"),
+      lbFig: this.keep("lbFig"),
+      openMorning: this.openLb("public/floors/floor-04/morning.webp", "Manhã — trabalho"),
+      openAfternoon: this.openLb("public/floors/floor-04/afternoon.webp", "Tarde — convivência"),
+      openNight: this.openLb("public/floors/floor-04/night.webp", "Noite — descanso"),
+      closeLb: this.closeLb,
+      onSubmit: this.onSubmit,
+      formNote: this.state.sent
+        ? "Recebido — [TBD] destino de envio a definir."
+        : "[TBD] destino de envio do formulário a definir.",
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -17,14 +17,16 @@ export type Floor = {
   states: FloorState[];
 };
 
-// Copy transcribed verbatim from 03-storytelling.md §18-30 — not invented.
+// Copy transcribed verbatim from 03-storytelling.md §18-30, with floor-01's
+// description updated per design_handoff_moduflexa_onepage/README.md §5-9
+// (redesign copy is final/authoritative where it differs) — not invented.
 export const floors: Floor[] = [
   {
     id: "floor-01",
     number: "01",
     title: "Uma sala pode esconder um quarto completo",
     description:
-      "Durante o dia, sala. Quando você precisa, quarto. A cama aparece só quando faz sentido para a rotina.",
+      "Durante o dia, sala. Quando você precisa, quarto. A função muda. O espaço continua o mesmo.",
     states: [
       {
         label: "Sala com cama retrátil fechada",

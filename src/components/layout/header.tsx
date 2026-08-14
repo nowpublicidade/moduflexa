@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { MobileMenu } from "@/components/layout/mobile-menu";
+import { useHeaderState } from "@/lib/motion/use-header-state";
 
 const navItems = [
   { href: "#ambientes", label: "Ambientes" },
   { href: "#solucoes", label: "Soluções" },
+  { href: "#produtos", label: "Produtos" },
   { href: "#unidades", label: "Unidades" },
   { href: "#contato", label: "Contato" },
 ];
@@ -12,50 +16,96 @@ const navItems = [
 const ctaHref = "#unidades";
 const ctaLabel = "Encontre uma unidade";
 
-// Header starts solid (not transparent-over-hero) since the scroll-reactive
-// background swap described in 04-motion-guide.md §37 belongs to the motion
-// phase — this static pass must read correctly with zero JavaScript.
+// Dois estados por scroll (README §1): transparente sobre o hero, sólido
+// depois. useHeaderState decide o limiar (alturaDoHero - 120); aqui só
+// aplicamos as classes correspondentes.
 export function Header() {
+  const solid = useHeaderState("inicio");
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-white/95 backdrop-blur-sm">
-      <Container>
-        <div className="relative flex h-16 items-center justify-between md:h-20">
-          <a href="#inicio" className="shrink-0">
-            <Image
-              src="/brand/logo-primary.png"
-              alt="Moduflexa"
-              width={2000}
-              height={798}
-              priority
-              className="h-8 w-auto md:h-10"
-            />
-          </a>
+    <>
+      {/* Véu superior: garante legibilidade do header sobre a foto antes do
+          fundo sólido entrar. Desliga junto com o estado sólido. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[55] h-40 transition-opacity duration-500"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(21,42,70,0.62) 0%, rgba(21,42,70,0) 100%)",
+          opacity: solid ? 0 : 1,
+        }}
+      />
 
-          <nav aria-label="Navegação principal" className="hidden md:block">
-            <ul className="flex items-center gap-8">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    className="text-sm font-medium text-text hover:text-brand-orange"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+      <header
+        className="fixed inset-x-0 top-0 z-[60] border-b transition-[background-color,border-color] duration-500 ease-out"
+        style={{
+          height: "clamp(68px,8vw,84px)",
+          backgroundColor: solid ? "rgba(247,245,242,0.94)" : "transparent",
+          borderColor: solid ? "var(--color-hairline-10)" : "transparent",
+        }}
+      >
+        <Container>
+          <div className="flex h-full items-center justify-between">
+            <a href="#inicio" className="relative block h-[clamp(24px,2.6vw,30px)] shrink-0 w-[160px]">
+              <Image
+                src="/brand/logo-light.png"
+                alt="Moduflexa"
+                fill
+                priority
+                sizes="160px"
+                className="object-contain object-left transition-opacity duration-[450ms]"
+                style={{ opacity: solid ? 0 : 1 }}
+              />
+              <Image
+                src="/brand/logo-primary.png"
+                alt="Moduflexa"
+                fill
+                priority
+                sizes="160px"
+                className="object-contain object-left transition-opacity duration-[450ms]"
+                style={{ opacity: solid ? 1 : 0 }}
+              />
+            </a>
 
-          <a
-            href={ctaHref}
-            className="hidden min-h-12 items-center justify-center rounded-pill bg-brand-orange px-6 text-sm font-bold text-white transition-colors hover:bg-brand-orange-dark md:inline-flex"
-          >
-            {ctaLabel}
-          </a>
+            <nav aria-label="Navegação principal" className="hidden md:block">
+              <ul className="flex items-center gap-8">
+                {navItems.map((item) => (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      className="text-[13px] font-medium tracking-[0.04em] transition-colors hover:text-brand-orange"
+                      style={{
+                        color: solid
+                          ? "var(--color-brand-navy)"
+                          : "rgba(255,255,255,0.9)",
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <MobileMenu items={navItems} ctaHref={ctaHref} ctaLabel={ctaLabel} />
-        </div>
-      </Container>
-    </header>
+            <a
+              href={ctaHref}
+              className="hidden min-h-11 items-center justify-center rounded-pill border px-5 text-[13px] font-semibold transition-colors hover:border-brand-orange hover:bg-brand-orange hover:text-white md:inline-flex"
+              style={{
+                borderColor: solid
+                  ? "var(--color-brand-navy)"
+                  : "rgba(255,255,255,0.45)",
+                color: solid ? "var(--color-brand-navy)" : "rgba(255,255,255,0.9)",
+              }}
+            >
+              {ctaLabel}
+            </a>
+
+            <div style={{ color: solid ? "var(--color-brand-navy)" : "#fff" }}>
+              <MobileMenu items={navItems} ctaHref={ctaHref} ctaLabel={ctaLabel} />
+            </div>
+          </div>
+        </Container>
+      </header>
+    </>
   );
 }

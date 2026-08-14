@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#f7f5f2; color:#18212a; -webkit-font-smoothing:antialiased; }
+  a { color:#152a46; text-decoration:none; }
+  a:hover { color:#d74e01; }
+  * { box-sizing:border-box; }
+</style>
+</helmet>
+
+<div style="font-family:Jost, sans-serif;">
+
+  <header style="position:sticky; top:0; z-index:50; background:rgba(247,245,242,0.92); backdrop-filter:saturate(1.2) blur(6px); border-bottom:1px solid rgba(21,42,70,0.08);">
+    <div style="max-width:1440px; margin-inline:auto; padding:0 clamp(20px,4vw,48px); height:80px; display:flex; align-items:center; justify-content:space-between; gap:32px;">
+      <img src="public/brand/logo-primary.png" alt="Moduflexa" style="height:30px; width:auto;">
+      <nav style="display:flex; align-items:center; gap:clamp(16px,2.4vw,36px); font-family:Poppins, sans-serif; font-size:13px; font-weight:500; letter-spacing:0.04em;">
+        <a href="#ambientes">Ambientes</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#unidades">Unidades</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a href="#unidades" style="font-family:Poppins, sans-serif; display:inline-flex; align-items:center; min-height:44px; padding:0 22px; border:1px solid #152a46; border-radius:999px; font-size:13px; font-weight:600; letter-spacing:0.02em;">Encontre uma unidade</a>
+    </div>
+  </header>
+
+  <section id="inicio" style="position:relative; border-bottom:1px solid rgba(21,42,70,0.1);">
+    <div style="max-width:1440px; margin-inline:auto; padding-left:clamp(20px,4vw,48px); display:grid; grid-template-columns:minmax(320px,42fr) 58fr; align-items:center; gap:clamp(32px,5vw,72px); min-height:min(86vh,880px); padding-top:64px; padding-bottom:64px;">
+      <div style="display:flex; flex-direction:column; gap:28px; max-width:560px;">
+        <div style="display:flex; align-items:center; gap:12px; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:#4d7392;">
+          <span style="display:block; width:40px; height:1px; background:#4d7392;"></span>
+          Móveis retráteis · São Paulo
+        </div>
+        <h1 style="margin:0; font-family:Poppins, sans-serif; font-weight:600; font-size:clamp(44px,5.6vw,86px); line-height:0.96; letter-spacing:-0.03em; color:#152a46; text-wrap:balance;">O espaço da sua casa pode fazer muito mais</h1>
+        <p style="margin:0; max-width:44ch; font-size:clamp(17px,1.4vw,21px); font-weight:300; line-height:1.6; color:#4a5560; text-wrap:pretty;">Soluções retráteis e multifuncionais para transformar ambientes compactos conforme a sua rotina.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center; font-family:Poppins, sans-serif;">
+          <a href="#ambientes" style="display:inline-flex; align-items:center; min-height:52px; padding:0 30px; border-radius:999px; background:#fa6b09; color:#fff; font-size:14px; font-weight:600;" style-hover="background:#d74e01;">Explore as possibilidades</a>
+          <a href="#unidades" style="display:inline-flex; align-items:center; min-height:52px; padding:0 8px; font-size:14px; font-weight:600; color:#152a46; border-bottom:1px solid rgba(21,42,70,0.3);">Encontre uma unidade</a>
+        </div>
+      </div>
+      <div style="position:relative; align-self:stretch; min-height:420px;">
+        <img src="public/floors/floor-05/hero-desktop.webp" alt="Studio com cama retrátil aberta e sala integrada" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; left:0; top:0; bottom:0; width:1px; background:rgba(21,42,70,0.14);"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ambientes" style="background:#fff; border-bottom:1px solid rgba(21,42,70,0.08);">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,10vw,140px) clamp(20px,4vw,48px);">
+      <div style="max-width:62ch; display:flex; flex-direction:column; gap:24px;">
+        <h2 style="margin:0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.6vw,54px); line-height:1.08; letter-spacing:-0.02em; color:#152a46;">Seu espaço não precisa ter uma única função</h2>
+        <p style="margin:0; font-size:clamp(16px,1.25vw,19px); font-weight:300; line-height:1.75; color:#4a5560; text-wrap:pretty;">A casa muda ao longo do dia. Ela pode ser trabalho pela manhã, convivência à tarde e descanso à noite. Os móveis também podem acompanhar essa mudança.</p>
+      </div>
+      <div style="margin-top:clamp(48px,6vw,88px); display:flex; align-items:center; gap:20px; font-family:Poppins, sans-serif; font-size:12px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fa6b09;">
+        <span style="flex:1; height:1px; background:rgba(21,42,70,0.12);"></span>
+        Uma mesma metragem. Novas possibilidades.
+        <span style="flex:1; height:1px; background:rgba(21,42,70,0.12);"></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="floor-01" style="position:relative; overflow:hidden;">
+    <div style="max-width:1440px; margin-inline:auto; padding:clamp(72px,9vw,128px) 0 clamp(72px,9vw,128px) clamp(20px,4vw,48px); display:grid; grid-template-columns:minmax(300px,38fr) 62fr; gap:clamp(32px,5vw,80px); align-items:center;">
+      <div style="position:relative; z-index:2;">
+        <div aria-hidden="true" style="font-family:Poppins, sans-serif; font-weight:700; font-size:clamp(120px,15vw,220px); line-height:0.8; letter-spacing:-0.04em; color:transparent; -webkit-text-stroke:1px rgba(250,107,9,0.55); margin-bottom:-8px;">01</div>
+        <h2 style="margin:20px 0 0; font-family:Poppins, sans-serif; font-weight:500; font-size:clamp(30px,3.4vw,50px); line-height:1.06; letter-spacing:-0.02em; color:#152a46; max-width:22ch;">Uma sala pode esconder um quarto completo</h2>
+        <p style="margin:20px 0 0; max-width:38ch; font-size:clamp(16px,1.2vw,19px); font-weight:300; line-height:1.7; color:#4a5560;">Durante o dia, sala. Quando você precisa, quarto. A função muda. O espaço continua o mesmo.</p>
+      </div>
+
+      <div style="position:relative;">
+        <div style="position:relative; aspect-ratio:16/9; background:#e8e5e0;">
+          <img src="public/floors/floor-01/closed-desktop.webp" alt="Sala com cama retrátil fechada" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+          <img ref="{{ fadeImg }}" src="public/floors/floor-01/open-desktop.webp" alt="Mesmo ambiente com a cama retrátil aberta" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.6s cubic-bezier(0.22,1,0.36,1);">
+        </div>
+        <div style="margin-top:14px; display:flex; justify-content:space-between; align-items:center; gap:16px; font-family:Poppins, sans-serif; font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:#66707a;">
+          <span>Fechada — sala</span>
+          <span style="flex:1; height:1px; background:rgba(21,42,70,0.12);"></span>
+          <span style="color:#fa6b09;">Aberta — quarto</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.el = null;
+    this.setRef = (el) => { this.el = el; this.observe(); };
+  }
+  observe() {
+    if (!this.el || this.io) return;
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (this.el) this.el.style.opacity = e.isIntersecting ? "1" : "0"; });
+    }, { threshold: 0.45 });
+    this.io.observe(this.el);
+  }
+  componentWillUnmount() { if (this.io) this.io.disconnect(); }
+  renderVals() { return { fadeImg: this.setRef }; }
+}
+</script>
+</body>
+</html>

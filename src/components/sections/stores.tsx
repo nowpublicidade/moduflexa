@@ -1,35 +1,47 @@
 import { Container } from "@/components/layout/container";
+import { Reveal } from "@/components/motion/reveal";
 import { StoreCard } from "@/components/ui/store-card";
 import { stores } from "@/data/stores";
 
+// H2/parágrafo per design_handoff_moduflexa_onepage/README.md §13 (copy
+// final, substitui a versão anterior "Conheça a Moduflexa de perto").
 export function Stores() {
   return (
     <section
       id="unidades"
       aria-labelledby="stores-title"
-      className="bg-off-white py-16 md:py-24"
+      className="bg-off-white"
+      style={{ paddingBlock: "var(--section-padding-y)" }}
     >
       <Container>
-        <div className="mx-auto max-w-[65ch] text-center">
-          <p className="text-sm font-medium text-brand-orange">
-            Agora imagine isso na sua casa
-          </p>
-          <h2
-            id="stores-title"
-            className="mt-3 text-[clamp(2rem,4vw,4.5rem)] leading-[1.05] font-bold text-brand-navy"
-          >
-            Conheça a Moduflexa de perto
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-text-muted">
-            Encontre uma unidade e veja as soluções funcionando pessoalmente.
-          </p>
-        </div>
+        <Reveal>
+          <div className="mx-auto max-w-[60ch] text-center">
+            <h2
+              id="stores-title"
+              className="font-heading font-medium text-brand-navy"
+              style={{
+                fontSize: "clamp(30px,3.8vw,56px)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.025em",
+              }}
+            >
+              Agora imagine isso na sua casa
+            </h2>
+            <p
+              className="mt-4 font-light text-text-body"
+              style={{ fontSize: "clamp(16px,1.25vw,19px)", lineHeight: 1.7 }}
+            >
+              Conheça uma unidade Moduflexa e veja as soluções funcionando de
+              perto.
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="mx-auto mt-12 grid max-w-2xl gap-6">
+        <Reveal index={1} className="mx-auto mt-16 max-w-3xl">
           {stores.map((store) => (
             <StoreCard key={store.id} store={store} />
           ))}
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

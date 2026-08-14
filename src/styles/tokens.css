@@ -1,67 +1,63 @@
 /**
- * Design tokens — see /docs/02-design-system.md
+ * Design tokens — redesign de alta fidelidade, ver
+ * design_handoff_moduflexa_onepage/README.md ("Design Tokens").
  *
  * Tailwind v4 reads `@theme` values directly (no tailwind.config.js).
  * Every key here both (a) generates a matching utility class
  * (e.g. --color-brand-navy → bg-brand-navy, text-brand-navy) and
  * (b) is emitted as a real CSS custom property, so `var(--color-brand-navy)`
- * also works in plain CSS. This keeps a single source of truth per §70.
+ * also works in plain CSS.
  */
 @theme {
-  /* Brand — 02-design-system.md §2, §5-8 */
+  /* Brand */
   --color-brand-orange-dark: #d74e01;
   --color-brand-orange: #fa6b09;
   --color-brand-blue: #4d7392;
   --color-brand-navy: #152a46;
+  --color-brand-navy-dark: #0f1f34;
 
-  /* Neutrals — 02-design-system.md §9 */
+  /* Neutrals */
   --color-white: #ffffff;
   --color-off-white: #f7f5f2;
+  --color-cream: #faf5ee;
   --color-surface: #f0ede8;
+  --color-loading: #e8e5e0;
   --color-border: #ddd8d1;
   --color-text: #18212a;
+  --color-text-body: #3f4a55;
   --color-text-muted: #66707a;
+  --color-text-tertiary: #7b8590;
   --color-black: #111111;
 
-  /* Layout — 02-design-system.md §25 */
+  /* Utility */
+  --color-whatsapp: #25d366;
+
+  /* Hairlines — bordas/divisores de 1px sobre navy */
+  --color-hairline-08: rgba(21, 42, 70, 0.08);
+  --color-hairline-10: rgba(21, 42, 70, 0.1);
+  --color-hairline-12: rgba(21, 42, 70, 0.12);
+  --color-hairline-14: rgba(21, 42, 70, 0.14);
+
+  /* Layout */
   --container-max: 1440px;
 
-  /* Radius — 02-design-system.md §31 */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  /* Radius — decisão editorial deliberada: zero em tudo, exceto pílulas */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
   --radius-pill: 999px;
 
-  /* Shadow — 02-design-system.md §33 */
+  /* Shadow — só no botão flutuante do WhatsApp e no glow do divisor */
   --shadow-soft: 0 16px 50px rgba(21, 42, 70, 0.08);
+  --shadow-whatsapp: 0 10px 30px rgba(21, 42, 70, 0.28);
+  --shadow-divider-glow: 0 0 18px rgba(250, 107, 9, 0.5);
 }
 
 /**
- * Spacing (02-design-system.md §28): the documented scale (base 4px,
- * space-1…space-11 = 4/8/12/16/24/32/48/64/96/128/160px) already matches
- * Tailwind's native spacing scale at 1/2/3/4/6/8/12/16/24/32/40. No custom
- * spacing tokens are defined — use Tailwind's built-in p-*, gap-*, m-*.
+ * Sem media queries de layout: clamp() fluido em tudo.
  */
-
 :root {
-  /* Responsive page padding — 02-design-system.md §27 */
-  --page-padding: 20px;
-}
-
-@media (min-width: 768px) {
-  :root {
-    --page-padding: 32px;
-  }
-}
-
-@media (min-width: 1024px) {
-  :root {
-    --page-padding: 48px;
-  }
-}
-
-@media (min-width: 1536px) {
-  :root {
-    --page-padding: 64px;
-  }
+  --page-padding: clamp(20px, 4vw, 48px);
+  --section-padding-y: clamp(72px, 9vw, 140px);
+  --section-padding-y-loose: clamp(96px, 14vw, 200px);
 }

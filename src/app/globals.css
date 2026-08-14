@@ -2,7 +2,8 @@
 @import "../styles/tokens.css";
 
 @theme inline {
-  --font-sans: var(--font-poppins);
+  --font-sans: var(--font-jost);
+  --font-heading: var(--font-poppins);
 }
 
 body {
@@ -15,26 +16,47 @@ body {
   outline-offset: 3px;
 }
 
-/* Anchor navigation (01-page-structure.md §19, §41 §53 §69): smooth native
- * scroll, and scroll-margin so the sticky header doesn't cover the section
- * heading right after the jump. Header is h-16 (64px) on mobile, h-20 (80px)
- * from md: up — see components/layout/header.tsx. */
+/* Anchor navigation: smooth native scroll, and scroll-margin so the fixed
+ * header doesn't cover the section heading right after the jump. Header
+ * height is clamp(68px,8vw,84px) — this mirrors that fluidly, no media
+ * query needed. */
 html {
   scroll-behavior: smooth;
 }
 
 [id] {
-  scroll-margin-top: 80px;
-}
-
-@media (min-width: 768px) {
-  [id] {
-    scroll-margin-top: 96px;
-  }
+  scroll-margin-top: clamp(88px, 10vw, 104px);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* Indicador de scroll do hero — README §3. */
+@keyframes mf-cue {
+  0% {
+    transform: scaleY(0.25);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0.25);
+    opacity: 0.35;
+  }
+}
+
+/* Manifesto cinético — README "Interactions & Behavior". A cor em si é a
+ * única coisa que transiciona (0.45s); o JS só liga/desliga o attribute. */
+[data-kinetic-word] {
+  color: rgba(21, 42, 70, 0.16);
+  transition: color 0.45s ease;
+}
+
+[data-kinetic-word][data-kinetic-active="true"] {
+  color: var(--color-brand-navy);
 }

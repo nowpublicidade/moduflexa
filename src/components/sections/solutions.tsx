@@ -1,10 +1,11 @@
 import { Container } from "@/components/layout/container";
+import { Reveal } from "@/components/motion/reveal";
 
-// Copy transcribed verbatim from 03-storytelling.md §36-39.
+// Copy transcribed verbatim from design_handoff_moduflexa_onepage/README.md §11.
 const differentiators = [
   {
     number: "01",
-    title: "O espaço trabalha melhor",
+    title: "Melhor aproveitamento do espaço",
     description:
       "A solução é pensada para liberar ou transformar áreas do ambiente.",
   },
@@ -33,29 +34,58 @@ export function Solutions() {
     <section
       id="solucoes"
       aria-labelledby="solutions-title"
-      className="bg-white py-16 md:py-24"
+      className="bg-white"
+      style={{ paddingBlock: "var(--section-padding-y)" }}
     >
       <Container>
-        <h2
-          id="solutions-title"
-          className="max-w-[20ch] text-[clamp(2rem,4vw,4.5rem)] leading-[1.05] font-bold text-brand-navy"
-        >
-          Soluções pensadas para transformar a rotina
-        </h2>
+        <Reveal>
+          <h2
+            id="solutions-title"
+            className="font-heading max-w-[20ch] font-medium text-brand-navy"
+            style={{
+              fontSize: "clamp(30px,3.8vw,56px)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.025em",
+            }}
+          >
+            Soluções pensadas para transformar a rotina
+          </h2>
+        </Reveal>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {differentiators.map((item) => (
-            <div key={item.number} className="flex flex-col gap-3">
-              <span className="text-sm font-extrabold tracking-[0.08em] text-brand-orange">
-                {item.number}
-              </span>
-              <h3 className="text-xl font-bold text-brand-navy">
-                {item.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-text-muted">
-                {item.description}
-              </p>
-            </div>
+        <div
+          className="mt-16 grid"
+          style={{
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            columnGap: "clamp(32px,5vw,96px)",
+            rowGap: "clamp(32px,4vw,64px)",
+          }}
+        >
+          {differentiators.map((item, index) => (
+            <Reveal key={item.number} index={index}>
+              <div
+                className="flex flex-col gap-3 border-t pt-6"
+                style={{ borderColor: "var(--color-hairline-12)" }}
+              >
+                <span
+                  className="font-heading font-bold"
+                  style={{
+                    fontSize: "44px",
+                    lineHeight: 1,
+                    letterSpacing: "-0.04em",
+                    color: "transparent",
+                    WebkitTextStroke: "1px rgba(250,107,9,0.55)",
+                  }}
+                >
+                  {item.number}
+                </span>
+                <h3 className="font-heading text-[22px] font-medium text-brand-navy">
+                  {item.title}
+                </h3>
+                <p className="max-w-[34ch] text-[16px] font-light text-text-body">
+                  {item.description}
+                </p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </Container>

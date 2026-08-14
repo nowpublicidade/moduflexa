@@ -4,22 +4,31 @@ export type Store = {
   neighborhood: string;
   city: string;
   state: string;
-  // Confirmed fields only: 05-seo-performance.md §6 documents the brand's
-  // existing association with "Cama Retrátil SP" and a location in Pompéia.
-  // Everything below is genuinely unconfirmed — 07-development-rules.md §117
-  // forbids inventing it, so these stay undefined until real data arrives.
-  address?: string; // TODO: confirmar endereço completo antes do deploy
-  phone?: string; // TODO: confirmar telefone antes do deploy
-  whatsapp?: string; // TODO: confirmar WhatsApp oficial antes do deploy (número em formato internacional, ex: 5511999999999)
-  hours?: string; // TODO: confirmar horário de funcionamento antes do deploy
+  address?: string;
+  phone?: string;
+  whatsapp?: string;
+  hours?: string;
 };
 
+// Dados confirmados via design_handoff_moduflexa_onepage/README.md
+// (2026-08-14): endereço, horário, telefone e WhatsApp da unidade Perdizes.
 export const stores: Store[] = [
   {
-    id: "pompeia",
-    name: "Moduflexa Pompéia",
-    neighborhood: "Pompéia",
+    id: "perdizes",
+    name: "Moduflexa Perdizes",
+    neighborhood: "Perdizes",
     city: "São Paulo",
     state: "SP",
+    address: "Rua Desembargador do Vale, 1014, São Paulo, Brazil 0501040",
+    phone: "1141790610",
+    whatsapp: "5511936233568",
+    hours: "Segunda a Sábado, 09h00 às 18h00",
   },
 ];
+
+export const whatsappMessage =
+  "Vi o site da moduflexa e gostaria de mais informacoes.";
+
+export function buildWhatsappHref(whatsapp: string) {
+  return `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
+}

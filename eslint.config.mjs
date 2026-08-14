@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Design handoff reference package: prototype runtime + .dc.html files,
+    // never shipped — see design_handoff_moduflexa_onepage/README.md.
+    "design_handoff_moduflexa_onepage/**",
   ]),
 ]);
 
