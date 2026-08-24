@@ -33,6 +33,7 @@ export function Floor02() {
               captionClosed="Fim do expediente"
               captionOpen="Home office aberto"
               aspectClassName="aspect-[4/3]"
+              captionClassName="pl-[var(--page-padding)]"
             />
           ) : null}
         </Reveal>

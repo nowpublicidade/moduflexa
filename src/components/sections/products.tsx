@@ -39,8 +39,8 @@ export function Products() {
               className="max-w-[52ch] font-light text-text-body"
               style={{ fontSize: "clamp(16px,1.25vw,19px)", lineHeight: 1.7 }}
             >
-              Quatro configurações de cama retrátil, em versões casal e
-              solteiro, para diferentes larguras de ambiente.
+              A linha Prime de cama retrátil, em versões casal e solteiro,
+              para diferentes larguras de ambiente.
             </p>
           </Reveal>
         </div>

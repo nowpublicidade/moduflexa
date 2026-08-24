@@ -26,20 +26,4 @@ export const products: Product[] = [
     size: "Solteiro — 0,88m",
     image: "/produtos/prime-solteiro.png",
   },
-  {
-    id: "economic-plus-casal",
-    line: "Linha Economic Plus",
-    name: "Economic Plus Casal",
-    description: "Toda a praticidade com o melhor preço.",
-    size: "Casal — 1,38m",
-    image: "/produtos/economic-plus-casal.png",
-  },
-  {
-    id: "economic-plus-solteiro",
-    line: "Linha Economic Plus",
-    name: "Economic Plus Solteiro",
-    description: "Solução acessível para qualquer espaço.",
-    size: "Solteiro — 0,88m",
-    image: "/produtos/economic-plus-solteiro.png",
-  },
 ];
