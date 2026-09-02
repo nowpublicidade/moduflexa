@@ -26,6 +26,11 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run build
+        env:
+          # O Pages serve num subcaminho (nowpublicidade.github.io/moduflexa).
+          # Sem isso o build sai com basePath vazio, que é o correto para o
+          # Coolify. Ver src/lib/base-path.ts.
+          NEXT_PUBLIC_BASE_PATH: /moduflexa
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

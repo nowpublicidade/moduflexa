@@ -3,11 +3,17 @@ import type { NextConfig } from "next";
 import { basePath } from "./src/lib/base-path";
 
 const nextConfig: NextConfig = {
-  // Publicado como repositório de projeto no GitHub Pages
-  // (nowpublicidade.github.io/moduflexa), não como user/organization page —
-  // por isso precisa de output:'export' + basePath/assetPrefix. Sem servidor
-  // Node no GitHub Pages, a otimização de imagem do next/image também não
-  // está disponível (docs: 01-app/02-guides/static-exports.md).
+  // Export estático: serve tanto o GitHub Pages quanto o Coolify (build pack
+  // Static, publish directory "out"). Atenção: com output:'export' o
+  // "next start" falha por design — o próprio Next aborta pedindo para servir
+  // a pasta "out" (docs: 01-app/02-guides/static-exports.md).
+  //
+  // basePath vem do ambiente: vazio na raiz de um domínio próprio, e
+  // "/moduflexa" no GitHub Pages, que serve num subcaminho. Ver
+  // src/lib/base-path.ts.
+  //
+  // Sem servidor Node, a otimização de imagem do next/image não está
+  // disponível — daí o images.unoptimized.
   output: "export",
   basePath,
   assetPrefix: basePath,
