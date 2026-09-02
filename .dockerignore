@@ -1,0 +1,13 @@
+.git
+.github
+node_modules
+.next
+out
+# Fontes de imagem e documentação não entram no build do site.
+assets-source
+docs
+design_handoff_moduflexa_onepage
+.agents
+skills-lock.json
+*.log
+.DS_Store
