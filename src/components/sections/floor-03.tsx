@@ -53,7 +53,11 @@ export function Floor03() {
             altOpen={floor.states[1].label}
             captionClosed="Uso cotidiano"
             captionOpen="Pronto para receber"
-            aspectClassName="aspect-[21/9]"
+            // 21:9 é um banner editorial que só funciona em tela larga: em
+            // 375px daria 161px de altura. Abaixo de md a caixa vira 4:3 e
+            // recebe um recorte próprio da imagem — mesmo breakpoint em que o
+            // <picture> troca de arte (min-width: 768px).
+            aspectClassName="aspect-[4/3] md:aspect-[21/9]"
             captionClassName="px-[var(--page-padding)]"
           />
         ) : null}

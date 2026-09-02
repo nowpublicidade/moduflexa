@@ -106,8 +106,8 @@ export const floors: Floor[] = [
             webp: "/floors/floor-03/everyday.webp",
           },
           mobile: {
-            avif: "/floors/floor-03/everyday.avif",
-            webp: "/floors/floor-03/everyday.webp",
+            avif: "/floors/floor-03/everyday-mobile.avif",
+            webp: "/floors/floor-03/everyday-mobile.webp",
           },
         },
       },
@@ -119,8 +119,8 @@ export const floors: Floor[] = [
             webp: "/floors/floor-03/hosting.webp",
           },
           mobile: {
-            avif: "/floors/floor-03/hosting.avif",
-            webp: "/floors/floor-03/hosting.webp",
+            avif: "/floors/floor-03/hosting-mobile.avif",
+            webp: "/floors/floor-03/hosting-mobile.webp",
           },
         },
       },
